@@ -1,17 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from './pages/main';
 
 function App() {
   return (
-    <Routes>
+    <Router>
       <div className="App">
-          <Router>
+          <Routes>
             <Route path="/" element={<MainPage />}/>
-          </Router>
+          </Routes>
       </div>
-    </Routes>
+    </Router>
   );
 }
 
