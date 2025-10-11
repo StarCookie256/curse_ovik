@@ -9,16 +9,19 @@ export default function PerfumeryHeader(){
 
   return(
     <header className='header-container'>
-      {headerPages.map((page) => (
-        <Link
-          key = {page.path}
-          to = {page.path}
-        >
-          <div className='header-item'>
-            {page.label}
-          </div>
-        </Link>
-      ))}
+      <div className='header-items-container'>
+        {headerPages.map((page) => (
+          <Link
+            className='header-item-link'
+            key = {page.path}
+            to = {page.path}
+          >
+            <div className='header-item'>
+              {page.label}
+            </div>
+          </Link>
+        ))}
+      </div>
     </header>
   );
 }

@@ -1,7 +1,7 @@
 
 .header-container{
   min-width: 100%;
-  min-height: 12vh;
+  min-height: 10vh;
   background-image: url('../../../public/perfumery_header.png');
   background-size: 95% 100%;
   background-position: center;
@@ -9,9 +9,33 @@
   margin-top: 1%;
   flex-direction: row;
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  font-family: 'HeaderFont' !important;
+}
+
+.header-items-container{
+  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* адаптивные колонки */
+  justify-content: left;
+  vertical-align: middle;
+  padding-left: 20%;
+  min-height: 100%;
+}
+
+.header-item-link{
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
 }
 
 .header-item{
-
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
