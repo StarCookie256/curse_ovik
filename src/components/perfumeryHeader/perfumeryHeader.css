@@ -1,41 +1,58 @@
-
 .header-container{
-  min-width: 100%;
-  min-height: 10vh;
+  width: 100%;
+  height: 10vh;
+  min-height: 60px;
   background-image: url('../../../public/perfumery_header.png');
   background-size: 95% 100%;
   background-position: center;
   background-repeat: no-repeat;
   margin-top: 1%;
-  flex-direction: row;
   display: flex;
-  justify-content: left;
+  justify-content: center; /* меняем left на center */
+  align-items: center;
   font-family: 'HeaderFont' !important;
 }
 
 .header-items-container{
+  display: flex;
   flex-direction: row;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* адаптивные колонки */
-  justify-content: left;
-  vertical-align: middle;
-  padding-left: 20%;
-  min-height: 100%;
+  justify-content: center; /* выравниваем по центру */
+  align-items: center;
+  height: 100%;
+  gap: 40px; /* расстояние между элементами */
+  /* убираем padding-left так как теперь центрируем */
 }
 
 .header-item-link{
-  display: table-cell;
+  display: flex;
+  align-items: center;
   height: 100%;
-  vertical-align: middle;
-  text-align: center;
+  text-decoration: none;
+  padding: 0 15px;
   position: relative;
 }
 
 .header-item{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   font-size: 24px;
   color: rgba(255, 255, 255, 0.9);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* Эффект при наведении */
+.header-item:hover {
+  color: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .header-items-container {
+    gap: 20px;
+  }
+  
+  .header-item {
+    font-size: 18px;
+  }
 }

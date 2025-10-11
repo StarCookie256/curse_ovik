@@ -1,9 +1,10 @@
 import './main.css';
-import PerfumeryHeader from '../components/perfumeryHeader/perfumeryHeader';
 
 function MainPage(){
   return(
-    <PerfumeryHeader />
+    <div className='main-page-container'>
+      <div className='main-page-container'>Каталог товаров</div>
+    </div>
   );
 }
 
