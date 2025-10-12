@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainPage from './pages/main';
+import MainPage from './pages/main/main';
 import PerfumeryHeader from './components/perfumeryHeader/perfumeryHeader';
 
 function App() {

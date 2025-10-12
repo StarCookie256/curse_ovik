@@ -1,7 +1,7 @@
 import './main.css';
 import { useState, useEffect } from 'react';
-import { productService } from '../api/services/productsService';
-import ProductCard from '../components/productCard/productCard';
+import { productService } from '../../api/services/productsService';
+import ProductCard from '../../components/productCard/productCard';
 
 function MainPage(){
   const [products, setProducts] = useState([]);
