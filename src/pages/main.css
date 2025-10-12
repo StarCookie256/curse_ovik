@@ -7,3 +7,14 @@
   text-shadow: 2px 7px 8px rgba(255, 156, 187, 0.8);
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+.main-page-products-container{
+  flex: 1; /* растягивается на все доступное пространство */
+  padding: 1% 10% 1% 10%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* адаптивные колонки */
+  gap: 1rem; /* фиксированный gap вместо % */
+  align-content: flex-start; /* элементы начинаются сверху */
+  min-height: 0; /* важно для flex-потомков */
+  overflow: auto; /* прокрутка если не помещается */
+}
