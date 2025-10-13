@@ -44,3 +44,11 @@
       font-weight: normal;
       font-style: normal;
 }
+
+@font-face {
+      font-family: 'NormalTextFont';
+      src: url('/public/NormalTextFont.woff2') format('woff2'),
+           url('/public/NormalTextFont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+}
