@@ -1,7 +1,7 @@
 import './filterBar.css';
 import { useEffect, useState, useRef } from 'react';
 import noUiSlider from 'nouislider';
-import 'nouislider/dist/nouislider.css'; // не забудьте стили
+import 'nouislider/dist/nouislider.css';
 
 function FilterBar(){
   const [priceValues, setPriceValues] = useState({
