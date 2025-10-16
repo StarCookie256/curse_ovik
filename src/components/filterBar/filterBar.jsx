@@ -22,14 +22,16 @@ function FilterBar(){
         </div>
       </div>
 
-      <div className='filterBar-header'>Цена</div>
-      <PerfumerySlider
-      firstMaxValue = {0}
-      secondMaxValue = {99999}
-      valueType = "руб."
-      />
+      <div className='filterBar-genders-container'>
+        <div className='filterBar-header'>Цена</div>
+        <PerfumerySlider
+        firstMaxValue = {0}
+        secondMaxValue = {99999}
+        valueType = "руб."
+        />
+      </div>
 
-
+      <div className='filterBar-header'>Бренды</div>
 
     </div>
   );
