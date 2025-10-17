@@ -1,6 +1,7 @@
 import './filterBar.css';
 import PerfumeryCheckbox from '../perfumeryCheckbox/perfumeryCheckbox';
 import PerfumerySlider from '../perfumerySlider/perfumerySlider';
+import PerfumeryScrollSearcher from '../perfumeryScrollSearcher/perfumeryScrollSearcher';
 
 function FilterBar(){
 
@@ -31,8 +32,18 @@ function FilterBar(){
         />
       </div>
 
-      <div className='filterBar-header'>Бренды</div>
-
+      <div className='filterBar-brands-container'>
+        <div className='filterBar-header'>Бренды</div>
+        <PerfumeryScrollSearcher
+        elements={Array.from({ length: 10 }).map((_, i) => (
+          <PerfumeryCheckbox 
+            key={i}
+            id={`-brand-${i}`}
+            labelText="Брбр Патапим"
+          />
+        ))}
+        />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,14 @@
+ .perfumeryScrollSearcher-container{
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+ }
+ 
+ .perfumeryScrollSearcher-items{
+    overflow: auto;
+    max-height: 12rem;
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
