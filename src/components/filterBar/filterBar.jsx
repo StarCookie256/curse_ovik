@@ -9,7 +9,7 @@ function FilterBar(){
     <div className='filterBar-container'>
       <div className='filterBar-container-header'>Поиск по фильтру</div>
       
-      <div className='filterBar-genders-container'>
+      <div className='filterBar-element-container'>
         <div className='filterBar-header'>Пол</div>
         <div className='filterBar-genders'>
           <PerfumeryCheckbox 
@@ -23,7 +23,7 @@ function FilterBar(){
         </div>
       </div>
 
-      <div className='filterBar-genders-container'>
+      <div className='filterBar-element-container'>
         <div className='filterBar-header'>Цена</div>
         <PerfumerySlider
         firstMaxValue = {0}
@@ -32,16 +32,33 @@ function FilterBar(){
         />
       </div>
 
-      <div className='filterBar-brands-container'>
+      <div className='filterBar-element-container'>
         <div className='filterBar-header'>Бренды</div>
         <PerfumeryScrollSearcher
         elements={Array.from({ length: 10 }).map((_, i) => (
           <PerfumeryCheckbox 
             key={i}
-            id={`-brand-${i}`}
-            labelText="Брбр Патапим"
+            elementId={`brand-${i}`}
+            id={`brand-${i}`}
+            labelText={`Брбр Патапим${i}`}
           />
         ))}
+        whatFind="brands"
+        />
+      </div>
+
+      <div className='filterBar-element-container'>
+        <div className='filterBar-header'>Категории</div>
+        <PerfumeryScrollSearcher
+        elements={Array.from({ length: 10 }).map((_, i) => (
+          <PerfumeryCheckbox 
+            key={i}
+            elementId={`category-${i}`}
+            id={`category-${i}`}
+            labelText={`Пельмени${i}`}
+          />
+        ))}
+        whatFind="categories"
         />
       </div>
     </div>

@@ -1,16 +1,47 @@
 import './perfumeryScrollSearcher.css';
-import PerfumeryCheckbox from '../perfumeryCheckbox/perfumeryCheckbox';
-import { useState, useCallback, useRef } from 'react';
+import { filterBrands, filterCategories } from '../../api/globalVar';
 
 function PerfumeryScrollSearcher({
-  elements
+  elements,
+  whatFind
 }){
-  const [searchStr, setSearchStr] = useState('');
-  const elementsRef = useRef();
 
-  const searchItems = useCallback((e) => {
-    setSearchStr(e.target.value);
-  }, [searchStr]);
+  const searchItems = (e) => {
+    const toSearch = e.target.value;
+
+    if(whatFind === "brands"){
+      for (let index = 0; index < filterBrands.length; index++) {
+        const brandName = filterBrands[index].name.labelText.toLowerCase();
+        console.log(brandName);
+        let id = filterBrands[index].id.idOfElement;
+        console.log(id);
+  
+        let element = document.getElementById(id);
+        if(brandName.includes(toSearch.toLowerCase()) || toSearch.length === 0){
+          element.style.display = 'flex';
+        }
+        else{
+          element.style.display = 'none';
+        }
+      }
+    }
+    else if(whatFind === "categories"){
+      for (let index = 0; index < filterCategories.length; index++) {
+        const categoryName = filterCategories[index].name.labelText.toLowerCase();
+        console.log(categoryName);
+        let id = filterCategories[index].id.idOfElement;
+        console.log(id);
+  
+        let element = document.getElementById(id);
+        if(categoryName.includes(toSearch.toLowerCase()) || toSearch.length === 0){
+          element.style.display = 'flex';
+        }
+        else{
+          element.style.display = 'none';
+        }
+      }
+    }
+  };
 
   return(
     <div className='perfumeryScrollSearcher-container'>
