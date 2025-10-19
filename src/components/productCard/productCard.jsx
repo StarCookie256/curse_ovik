@@ -8,7 +8,8 @@ function ProductCard({
   brand,
   category,
   fPrice,
-  sPrice
+  sPrice,
+  gender
 }){
   return(
     <div className='product-card-container'>

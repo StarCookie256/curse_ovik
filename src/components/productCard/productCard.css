@@ -19,9 +19,9 @@
 }
 
 .product-card-img-container {
-  flex: 0 0 160px;
-  max-width: 160px;
-  min-height: 160px;
+  max-width: 100%;
+  min-height: 10rem;
+  max-height: 10rem;
   background: none;
   border-radius: 0.75rem;
   display: flex;
@@ -34,11 +34,10 @@
 
 .product-card-img{
   display: block;
+  height:100%;
   width: 100%;
-  height: 100%;
   border-radius: 12px;
-  object-fit: cover;
-  min-height: 100%;
+  object-fit: contain;
 }
 
 .product-card-info-container{

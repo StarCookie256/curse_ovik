@@ -2,6 +2,7 @@ import './filterBar.css';
 import PerfumeryCheckbox from '../perfumeryCheckbox/perfumeryCheckbox';
 import PerfumerySlider from '../perfumerySlider/perfumerySlider';
 import PerfumeryScrollSearcher from '../perfumeryScrollSearcher/perfumeryScrollSearcher';
+import { Link } from 'react-router-dom';
 
 function FilterBar(){
 
@@ -60,6 +61,21 @@ function FilterBar(){
         ))}
         whatFind="categories"
         />
+      </div>
+
+      <div className='filterBar-element-container'>
+        <div className='filterBar-header'>Объём</div>
+        <PerfumerySlider
+        firstMaxValue = {0}
+        secondMaxValue = {1000}
+        valueType = "мл."
+        />
+      </div>
+
+      <div className='filter-search-button-container'>
+        <Link to={'/search'} className='filter-search-link'>
+          <button className='filter-search-button'>Найти</button>
+        </Link>
       </div>
     </div>
   );

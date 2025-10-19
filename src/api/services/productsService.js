@@ -8,7 +8,8 @@ const mockProducts = [
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
-    sPrice: 20999
+    sPrice: 20999,
+    gender: 'male'
   },
   {
     id: 2,
@@ -18,7 +19,8 @@ const mockProducts = [
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
-    sPrice: 20999
+    sPrice: 20999,
+    gender: 'male'
   },
   {
     id: 3,
@@ -28,7 +30,8 @@ const mockProducts = [
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
-    sPrice: 20999
+    sPrice: 20999,
+    gender: 'male'
   },
   {
     id: 4,
@@ -38,7 +41,8 @@ const mockProducts = [
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
-    sPrice: 20999
+    sPrice: 20999,
+    gender: 'female'
   },
   {
     id: 5,
@@ -48,7 +52,8 @@ const mockProducts = [
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
-    sPrice: 20999
+    sPrice: 20999,
+    gender: 'unisex'
   },
   {
     id: 6,
@@ -58,7 +63,63 @@ const mockProducts = [
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
-    sPrice: 20999
+    sPrice: 20999,
+    gender: 'unisex'
+  },
+  {
+    id: 7,
+    name: 'Газики фембоев',
+    brand: 'Femboy Production',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'unisex'
+  },
+  {
+    id: 8,
+    name: 'Газики фембоев',
+    brand: 'Femboy Production',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male'
+  },
+  {
+    id: 9,
+    name: 'Газики фембоев',
+    brand: 'Femboy Production',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'female'
+  },
+  {
+    id: 10,
+    name: 'Газики фембоев',
+    brand: 'Femboy Production',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male'
+  },
+  {
+    id: 11,
+    name: 'Газики фембоев',
+    brand: 'Femboy Production',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'female'
   }
 ];
 

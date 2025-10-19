@@ -1,0 +1,49 @@
+
+.perfumeryFooter-container{
+  background: linear-gradient(to bottom,  rgba(255, 156, 187, 0.7), rgb(127, 51, 89));
+  height: 10rem;
+  box-shadow: 2px 2px 1rem rgb(127, 51, 89, 0.4);
+  display: flex;
+}
+
+.perfumeryFooter-info{
+  font-size: 1rem;
+  padding: 3rem 0 0 2rem;
+  text-align: left;
+  color: white;
+}
+
+.perfumeryFooter-feedback-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 3rem 4rem 0 2rem;
+  gap: 0.5rem;
+  min-width: 150px;
+  margin-left: auto;
+}
+
+.perfumeryFooter-feedback-text{
+  color: white;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.perfumeryFooter-feedback-icons-container{
+  display: flex;
+  gap: 0.5rem;
+}
+
+.perfumeryFooter-feedback-link{
+  display: block;
+  background: none;
+  width: 3rem;
+  height: 3rem;
+}
+
+.perfumeryFooter-feedback-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
