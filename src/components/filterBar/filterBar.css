@@ -53,11 +53,8 @@
 .filter-search-button-container{
   padding: 1rem 5% 0 5%;
 }
-
-.filter-search-link {
-  margin-top: auto;
-}
 .filter-search-button {
+  margin-top: auto;
   width: 100%;
   padding: 10px 0;
   border-radius: 12px;

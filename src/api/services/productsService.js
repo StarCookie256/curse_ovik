@@ -3,7 +3,7 @@ const mockProducts = [
   {
     id: 1,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим0',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -14,7 +14,7 @@ const mockProducts = [
   {
     id: 2,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим1',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -25,7 +25,7 @@ const mockProducts = [
   {
     id: 3,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим2',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -36,7 +36,7 @@ const mockProducts = [
   {
     id: 4,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим3',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -47,7 +47,7 @@ const mockProducts = [
   {
     id: 5,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим4',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -58,7 +58,7 @@ const mockProducts = [
   {
     id: 6,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим5',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -69,7 +69,7 @@ const mockProducts = [
   {
     id: 7,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим6',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -80,7 +80,7 @@ const mockProducts = [
   {
     id: 8,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим7',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -91,7 +91,7 @@ const mockProducts = [
   {
     id: 9,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим8',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -102,7 +102,7 @@ const mockProducts = [
   {
     id: 10,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим9',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -113,7 +113,7 @@ const mockProducts = [
   {
     id: 11,
     name: 'Газики фембоев',
-    brand: 'Femboy Production',
+    brand: 'Брбр Патапим0',
     category: 'Кал',
     image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
     desc: 'Великолепные газики астольфо',
@@ -135,6 +135,12 @@ const mockProductsService = {
     }
     
     return product;
+  },
+
+  getProductsByBrand: async (brand) => {
+    const productsList = mockProducts.filter(p => p.brand === brand);
+
+    return productsList
   },
 
   updateProduct: async (id, productData) => {

@@ -2,13 +2,13 @@ import './filterBar.css';
 import PerfumeryCheckbox from '../perfumeryCheckbox/perfumeryCheckbox';
 import PerfumerySlider from '../perfumerySlider/perfumerySlider';
 import PerfumeryScrollSearcher from '../perfumeryScrollSearcher/perfumeryScrollSearcher';
-import { Link } from 'react-router-dom';
-import { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 function FilterBar(){
-  const [searching, setSearching] = useState(false);
+  const navigate = useNavigate();
   const searchArgs = {
-    gender: ['male', 'female'],
+    gender: [],
     priceValues: [10000, 69999],
     brands: [],
     categories: [],
@@ -22,23 +22,53 @@ function FilterBar(){
   const volumeRef = useRef();
 
   const searchButtonClick = () => {
-    setSearching(true);
-  };
+    // ПОЛУЧЕНИЕ ИНФЫ О ПОЛАХ
+    const selectedGenders = genderRef.current.querySelectorAll('.checked > label');
+    const genderInfo = Array.from(selectedGenders).map(label => {
+      return label.textContent;
+    });
 
-  useEffect(() => {
-    // if (filterBarRef.current) {
-    //   // Поиск полаааааа
-    //   const gendersElement = genderRef.current.querySelector;
-      
-    //   // Поиск по ID внутри контейнера
-    //   const elementById = containerRef.current.querySelector('#my-id');
-      
-    //   // Поиск всех элементов с классом
-    //   const allElements = containerRef.current.querySelectorAll('.my-class');
-      
-    //   console.log(elementByClass, elementById, allElements);
-    // }
-  }, [searching]);
+    genderInfo.forEach(gender => {
+      if(gender === "Для мужчин") searchArgs.gender.push("male");
+      if(gender === "Для женщин") searchArgs.gender.push("female");
+    });
+
+    // ПОЛУЧЕНИЕ ИНФЫ О ЦЕНЕ
+    const selectedPrices = priceRef.current.querySelectorAll('input[type="text"]');
+
+    searchArgs.priceValues[0] = selectedPrices[0].value;
+    searchArgs.priceValues[1] = selectedPrices[1].value;
+    
+    // ПОЛУЧЕНИЕ ИНФЫ О БРЕНДАХ
+    const selectedBrands = brandRef.current.querySelectorAll('.checked > label');
+    const brandInfo = Array.from(selectedBrands).map(label => {
+      return label.textContent;
+    });
+
+    brandInfo.forEach(brand => {
+      searchArgs.brands.push(brand);
+    });
+    
+    // ПОЛУЧЕНИЕ ИНФЫ О КАТЕГОРИЯХ
+    const selectedCategories = categoryRef.current.querySelectorAll('.checked > label');
+    const categoryInfo = Array.from(selectedCategories).map(label => {
+      return label.textContent;
+    });
+
+    categoryInfo.forEach(category => {
+      searchArgs.categories.push(category);
+    });
+
+    // ПОЛУЧЕНИЕ ИНФЫ ОБ ОБЪЁМЕ
+    const selectedVolumes = volumeRef.current.querySelectorAll('input[type="text"]');
+
+    searchArgs.volumeValues[0] = selectedVolumes[0].value;
+    searchArgs.volumeValues[1] = selectedVolumes[1].value;
+    
+    navigate('/search', {
+      state: searchArgs
+    });
+  };
 
   return(
     <div className='filterBar-container'>
@@ -107,9 +137,7 @@ function FilterBar(){
       </div>
 
       <div className='filter-search-button-container'>
-        <Link onClick={searchButtonClick} className='filter-search-link'>
-          <button className='filter-search-button'>Найти</button>
-        </Link>
+        <button onClick={searchButtonClick} className='filter-search-button'>Найти</button>
       </div>
     </div>
   );

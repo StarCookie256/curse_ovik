@@ -1,13 +1,15 @@
 import './perfumeryCheckbox.css';
 import { filterBrands } from '../../api/globalVar';
 import { filterCategories } from '../../api/globalVar';
+import {useRef} from 'react';
 
 function PerfumeryCheckbox({
   id,
   labelText,
   elementId
 }){
-
+  let checked = false;
+  const checkboxRef = useRef();
   let checkboxId = `perfumeryCheckbox-${id}`
   let idOfElement = `${elementId}`
 
@@ -51,9 +53,20 @@ function PerfumeryCheckbox({
     }
   }
 
+  const handleCheck = () => {
+    if(!checked){
+      checked = true;
+      checkboxRef.current.classList.add('checked');
+    }
+    else{
+      checked = false;
+      checkboxRef.current.classList.remove('checked');
+    }
+  }
+
   return(
-    <div id={idOfElement} className='perfumeryCheckbox-container'>
-      <input id={checkboxId} type='checkbox' className='perfumery-checkbox' />
+    <div ref={checkboxRef} id={idOfElement} className='perfumeryCheckbox-container'>
+      <input onClick={handleCheck} id={checkboxId} type='checkbox' className='perfumery-checkbox' />
       <label htmlFor={checkboxId}>{labelText}</label>
     </div>
   );
