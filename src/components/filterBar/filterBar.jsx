@@ -5,15 +5,20 @@ import PerfumeryScrollSearcher from '../perfumeryScrollSearcher/perfumeryScrollS
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 
-function FilterBar(){
+
+function FilterBar({
+  onSearch
+}){
   const navigate = useNavigate();
-  const searchArgs = {
-    gender: [],
-    priceValues: [10000, 69999],
-    brands: [],
-    categories: [],
-    volumeValues: [100, 700]
-  };
+  function createDefaultSearchArgs() {
+    return {
+      gender: [],
+      priceValues: [10000, 69999],
+      brands: [],
+      categories: [],
+      volumeValues: [100, 700]
+    };
+  }
 
   const genderRef = useRef();
   const priceRef = useRef();
@@ -22,24 +27,28 @@ function FilterBar(){
   const volumeRef = useRef();
 
   const searchButtonClick = () => {
-    // ПОЛУЧЕНИЕ ИНФЫ О ПОЛАХ
+    const searchArgs = createDefaultSearchArgs();
+
+    ////////////// ПОЛУЧЕНИЕ ИНФЫ О ПОЛАХ
     const selectedGenders = genderRef.current.querySelectorAll('.checked > label');
     const genderInfo = Array.from(selectedGenders).map(label => {
       return label.textContent;
     });
+    //////////////
 
     genderInfo.forEach(gender => {
       if(gender === "Для мужчин") searchArgs.gender.push("male");
-      if(gender === "Для женщин") searchArgs.gender.push("female");
+      else if(gender === "Для женщин") searchArgs.gender.push("female");
     });
 
-    // ПОЛУЧЕНИЕ ИНФЫ О ЦЕНЕ
+    ////////////// ПОЛУЧЕНИЕ ИНФЫ О ЦЕНЕ
     const selectedPrices = priceRef.current.querySelectorAll('input[type="text"]');
 
     searchArgs.priceValues[0] = selectedPrices[0].value;
     searchArgs.priceValues[1] = selectedPrices[1].value;
-    
-    // ПОЛУЧЕНИЕ ИНФЫ О БРЕНДАХ
+    //////////////
+
+    ////////////// ПОЛУЧЕНИЕ ИНФЫ О БРЕНДАХ
     const selectedBrands = brandRef.current.querySelectorAll('.checked > label');
     const brandInfo = Array.from(selectedBrands).map(label => {
       return label.textContent;
@@ -48,8 +57,9 @@ function FilterBar(){
     brandInfo.forEach(brand => {
       searchArgs.brands.push(brand);
     });
-    
-    // ПОЛУЧЕНИЕ ИНФЫ О КАТЕГОРИЯХ
+    //////////////
+
+    ////////////// ПОЛУЧЕНИЕ ИНФЫ О КАТЕГОРИЯХ
     const selectedCategories = categoryRef.current.querySelectorAll('.checked > label');
     const categoryInfo = Array.from(selectedCategories).map(label => {
       return label.textContent;
@@ -58,16 +68,23 @@ function FilterBar(){
     categoryInfo.forEach(category => {
       searchArgs.categories.push(category);
     });
+    //////////////
 
-    // ПОЛУЧЕНИЕ ИНФЫ ОБ ОБЪЁМЕ
+    ////////////// ПОЛУЧЕНИЕ ИНФЫ ОБ ОБЪЁМЕ
     const selectedVolumes = volumeRef.current.querySelectorAll('input[type="text"]');
 
     searchArgs.volumeValues[0] = selectedVolumes[0].value;
     searchArgs.volumeValues[1] = selectedVolumes[1].value;
+    //////////////
     
-    navigate('/search', {
-      state: searchArgs
-    });
+    if(window.location.pathname === '/search'){
+      onSearch(searchArgs);
+    }
+    else{
+      navigate('/search', {
+        state: searchArgs
+      });
+    }
   };
 
   return(

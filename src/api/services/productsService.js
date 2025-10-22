@@ -9,7 +9,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'male'
+    gender: 'male',
+    fVolume: 5,
+    sVolume: 200
   },
   {
     id: 2,
@@ -20,7 +22,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'male'
+    gender: 'male',
+    fVolume: 100,
+    sVolume: 500
   },
   {
     id: 3,
@@ -31,7 +35,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'male'
+    gender: 'male',
+    fVolume: 200,
+    sVolume: 700
   },
   {
     id: 4,
@@ -42,7 +48,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'female'
+    gender: 'female',
+    fVolume: 10,
+    sVolume: 300
   },
   {
     id: 5,
@@ -53,7 +61,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'unisex'
+    gender: 'male',
+    fVolume: 5,
+    sVolume: 200
   },
   {
     id: 6,
@@ -64,7 +74,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'unisex'
+    gender: 'female',
+    fVolume: 300,
+    sVolume: 900
   },
   {
     id: 7,
@@ -75,7 +87,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'unisex'
+    gender: 'male',
+    fVolume: 50,
+    sVolume: 350
   },
   {
     id: 8,
@@ -86,7 +100,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'male'
+    gender: 'male',
+    fVolume: 100,
+    sVolume: 900
   },
   {
     id: 9,
@@ -97,7 +113,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'female'
+    gender: 'female',
+    fVolume: 5,
+    sVolume: 100
   },
   {
     id: 10,
@@ -108,7 +126,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'male'
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
   },
   {
     id: 11,
@@ -119,7 +139,9 @@ const mockProducts = [
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
-    gender: 'female'
+    gender: 'female',
+    fVolume: 400,
+    sVolume: 700
   }
 ];
 

@@ -8,7 +8,6 @@ function PerfumeryCheckbox({
   labelText,
   elementId
 }){
-  let checked = false;
   const checkboxRef = useRef();
   let checkboxId = `perfumeryCheckbox-${id}`
   let idOfElement = `${elementId}`
@@ -54,13 +53,11 @@ function PerfumeryCheckbox({
   }
 
   const handleCheck = () => {
-    if(!checked){
-      checked = true;
-      checkboxRef.current.classList.add('checked');
+    if(checkboxRef.current.classList.contains('checked')){
+      checkboxRef.current.classList.remove('checked');
     }
     else{
-      checked = false;
-      checkboxRef.current.classList.remove('checked');
+      checkboxRef.current.classList.add('checked');
     }
   }
 
