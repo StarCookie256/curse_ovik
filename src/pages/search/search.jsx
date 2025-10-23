@@ -39,13 +39,13 @@ async function fetchProducts(searchArgs, setProducts) {
   //////////////
 
   ////////////// СОРТИРОВКА ПО ЦЕНАМ
-  localProductList = localProductList.filter(p => p.fPrice === searchArgs.priceValues[0] || p.sPrice === searchArgs.priceValues[1]);
+  localProductList = localProductList.filter(p => p.fPrice <= searchArgs.priceValues[1] && p.sPrice >= searchArgs.priceValues[0]);
   //////////////
 
   ////////////// СОРТИРОВКА ПО ОБЪЁМУ
-  localProductList = localProductList.filter(p => p.fVolume === searchArgs.volumeValues[0] || p.sVolume === searchArgs.volumeValues[1]);
+  localProductList = localProductList.filter(p => p.fVolume <= searchArgs.volumeValues[1] && p.sVolume >= searchArgs.volumeValues[0]);
   //////////////
-
+  console.log(localProductList.length);
   setProducts(localProductList);
 }
 
@@ -64,7 +64,7 @@ function SearchPage(){
 
   return(
     <div className='main-page-container'>
-      <div className='main-page-title'>Найдено товаров: 0</div>
+      <div className='main-page-title'>Найдено товаров: {products.length}</div>
 
       <div className='main-page-components-container'>
         <div className='main-page-products'>
