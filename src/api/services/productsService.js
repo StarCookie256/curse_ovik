@@ -142,12 +142,157 @@ const mockProducts = [
     gender: 'female',
     fVolume: 400,
     sVolume: 700
+  },
+  {
+    id: 12,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
+  },
+  {
+    id: 13,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
+  },
+  {
+    id: 14,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
+  },
+  {
+    id: 15,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
+  },
+  {
+    id: 16,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
+  },
+  {
+    id: 17,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
+  },
+  {
+    id: 18,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
+  },
+  {
+    id: 19,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
+  },
+  {
+    id: 20,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
+  },
+  {
+    id: 21,
+    name: 'Газики фембоев',
+    brand: 'Брбр Патапим9',
+    category: 'Кал',
+    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    desc: 'Великолепные газики астольфо',
+    fPrice: 1999,
+    sPrice: 20999,
+    gender: 'male',
+    fVolume: 150,
+    sVolume: 650
   }
 ];
 
 const mockProductsService = {
   getProducts: async () => {
     return mockProducts;
+  },
+
+  getProductsByPage: async (page, limit) => {
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    const products = mockProducts.slice(startIndex, endIndex);
+    
+    return {
+      products,
+      currentPage: page,
+      totalPages: Math.ceil(mockProducts.length / limit),
+      totalProducts: mockProducts.length,
+      hasNext: page < Math.ceil(mockProducts.length / limit),
+      hasPrev: page > 1
+    };
   },
 
   getProductById: async (id) => {    
