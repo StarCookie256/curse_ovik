@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
 
+
 function LoginPage(){
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +13,7 @@ function LoginPage(){
   const { login: authLogin, error } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
+  
   const from = location.state?.from?.pathname || '/';
 
   const handleSubmit = async (e) => {
