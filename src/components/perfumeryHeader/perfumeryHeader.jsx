@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 export default function PerfumeryHeader(){
   const headerPages = [
-    {path:'/main', pageName:'mainPage', label:'Магазин парфюмерии'},
+    {path:'/main', pageName:'mainPage', label:'Slay💅Star'},
     {path:'/main', pageName:'mainPage', label:'Каталог товаров'},
-    {path:'/main', pageName:'mainPage', label:'Личный кабинет'}
+    {path:'/cabinet', pageName:'cabinet', label:'Личный кабинет'}
   ];
 
 

@@ -6,20 +6,22 @@ import SearchPage from './pages/search/search';
 import PerfumeryFooter from './components/perfumeryFooter/perfumeryFooter';
 import LoginPage from './pages/login/LoginPage';
 import CabinetPage from './pages/cabinet/CabinetPage';
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 
 function App() {
-  const hideDecorRoutes = ["/login"]; // страницы, где скрываем декор всякий
-  const shouldHideDecor = hideDecorRoutes.includes(location.pathname);
+  // const hideDecorRoutes = ["/login"]; // страницы, где скрываем декор всякий
+  // const shouldHideDecor = hideDecorRoutes.includes(location.pathname);
 
   return (
     <Router>
       <div className="App">
-        {!shouldHideDecor && <PerfumeryHeader />}
+        {/* {!shouldHideDecor && <PerfumeryHeader />} */}
+        <PerfumeryHeader />
           <Routes>
             <Route
               path="/login"
               element={
-                <ProtectedRoute requireAuth={false}>
+                <ProtectedRoute requireAuth={true}>
                   <LoginPage />
                 </ProtectedRoute>
               }
@@ -36,7 +38,8 @@ function App() {
               }
             />
           </Routes>
-        {!shouldHideDecor && <PerfumeryFooter />}
+        <PerfumeryFooter />
+        {/* {!shouldHideDecor && <PerfumeryFooter />} */}
       </div>
     </Router>
   );
