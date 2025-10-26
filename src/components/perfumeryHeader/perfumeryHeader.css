@@ -6,7 +6,6 @@
   background-size: 95% 100%;
   background-position: center;
   background-repeat: no-repeat;
-  margin-top: 1%;
   display: flex;
   justify-content: center; /* меняем left на center */
   align-items: center;

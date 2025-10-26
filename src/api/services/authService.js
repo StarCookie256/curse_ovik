@@ -126,19 +126,19 @@ const realAuthService = {
 const mockUsers = [
 	{
 		id: 1,
-		name: "Говножрун",
+		name: "злий касане тето",
 		email: "123",
 		password: "123",
-		image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+		image: "https://i.pinimg.com/736x/53/c1/1f/53c11f24f3121b0c8ad8f8de87b5c199.jpg",
 		phone: "+7 (999) 123-45-67",
     address: "Ул. Пушкина, дом Колотушкина"
 	},
 	{
 		id: 2,
-		name: "Пердун",
+		name: "злий мику хастуна",
 		email: "user",
 		password: "user",
-		image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+		image: "https://i.redd.it/hatsune-miku-analog-horror-by-me-v0-6docxzxhdwad1.png?width=2298&format=png&auto=webp&s=9039fa14cc65cba2ff9531242d9ba40eb6cb6bb9",
 		phone: "+7 (999) 123-45-67",
     address: "Ул. Пушкина, дом Колотушкина"
 	}

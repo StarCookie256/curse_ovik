@@ -36,7 +36,10 @@ function LoginPage(){
       
       {error && <div className="login-page-error">{error}</div>}
 
-      <form onSubmit={handleSubmit}>
+      <form 
+        className='login-page-form'
+        onSubmit={handleSubmit}
+      >
         <div className="login-page-input-container login">
           <label>Логин:</label>
           <input

@@ -4,6 +4,7 @@
   height: 10rem;
   box-shadow: 2px 2px 1rem rgb(127, 51, 89, 0.4);
   display: flex;
+  margin-top: auto;
 }
 @media (max-width: 768px) {
   .perfumeryFooter-container {
