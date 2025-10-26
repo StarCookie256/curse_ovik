@@ -10,6 +10,7 @@
   justify-content: center; /* меняем left на center */
   align-items: center;
   font-family: 'HeaderFont' !important;
+  user-select: none;
 }
 
 .header-items-container{
@@ -29,6 +30,10 @@
   text-decoration: none;
   padding: 0 15px;
   position: relative;
+}
+
+.header-item-link.active {
+  pointer-events: none;
 }
 
 .header-item{

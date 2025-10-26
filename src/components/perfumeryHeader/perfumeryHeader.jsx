@@ -1,7 +1,8 @@
 import './perfumeryHeader.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function PerfumeryHeader(){
+  const location = useLocation();
   const headerPages = [
     {path:'/main', pageName:'mainPage', label:'Slay💅Star'},
     {path:'/main', pageName:'mainPage', label:'Каталог товаров'},
@@ -14,7 +15,7 @@ export default function PerfumeryHeader(){
       <div className='header-items-container'>
         {headerPages.map((page) => (
           <Link
-            className='header-item-link'
+            className={`header-item-link ${location.pathname === page.path ? 'active' : ''}`}
             key = {page.path}
             to = {page.path}
           >

@@ -4,26 +4,22 @@ import { useState, useEffect } from 'react';
 
 function CabinetPage(){
   const {user, logout, refreshProfile} = useAuth();
-  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
-    loadUserData();
-  }, []);
+    const loadUserData = async () => {
+      try {
+        setLoading(true);
+        await refreshProfile();
+      } catch (error) {
+        console.error('Error loading user data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const loadUserData = async () => {
-    try {
-      setLoading(true);
-      await refreshProfile();
-      const data = user;
-      console.log(user);
-      setUserData(data);
-    } catch (error) {
-      console.error('Error loading user data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    loadUserData();
+  }, [refreshProfile]); 
   
   const exit = () => {
     logout();
@@ -47,18 +43,18 @@ function CabinetPage(){
             <div className='cabinet-page-image-container'>
               <img
                 className='cabinet-page-image'
-                src={userData.image}
+                src={user.image}
                 alt="IMG"
               />
             </div>
             <div className='cabinet-page-top-info'>
-              <p className='cabinet-page-text'>{userData.name}</p>
-              <p className='cabinet-page-text'>Электронная почта: {userData.email}</p>
+              <p className='cabinet-page-text'>{user.name}</p>
+              <p className='cabinet-page-text'>Электронная почта: {user.email}</p>
             </div>
           </div>
           <div className='cabinet-page-other-info-container'>
-            <p className='cabinet-page-text'>Телефон: {userData.phone}</p>
-            <p className='cabinet-page-text'>Адрес: {userData.address}</p>
+            <p className='cabinet-page-text'>Телефон: {user.phone}</p>
+            <p className='cabinet-page-text'>Адрес: {user.address}</p>
             <button className='cabinet-page-button exit' onClick={exit}>Выйти из аккаунта</button>
           </div>
 

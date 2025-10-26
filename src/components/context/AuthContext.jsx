@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { authService } from '../../api/services/authService';
 
 const AuthContext = createContext();
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const refreshProfile = async () => {
+  const refreshProfile = useCallback(async () => {
     try {
       const profile = await authService.getProfile();
       setUser(profile);
@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       console.error('Failed to refresh profile:', err);
     }
-  };
+  }, []);
 
   const value = {
     user,
