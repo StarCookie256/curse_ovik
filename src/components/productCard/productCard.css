@@ -71,6 +71,31 @@
   width: 100%;
 }
 
+/* .product-card-gender{
+  margin-bottom: 12px;
+} */
+
+.product-card-gender span{
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;  
+}
+
+.product-card-gender.male span{
+  background: linear-gradient(to right, #007170, #6fc3c4);
+  box-shadow: 0 0 1rem rgb(111, 195, 196);
+}
+
+.product-card-gender.female span{
+  background: linear-gradient(to right, rgb(213, 3, 102), rgb(255, 174, 200));
+  box-shadow: 0 0 1rem rgb(255, 174, 200);
+}
+
 .product-card-price {
   font-size: 16px;
   text-shadow: 1px 5px 7px rgb(255, 174, 200, 0.8);

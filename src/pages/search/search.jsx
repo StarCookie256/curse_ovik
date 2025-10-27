@@ -108,6 +108,7 @@ function SearchPage(){
                 image = {product.image}
                 fPrice = {product.fPrice}
                 sPrice = {product.sPrice}
+                gender = {product.gender}
               />
             ))}
           </div>

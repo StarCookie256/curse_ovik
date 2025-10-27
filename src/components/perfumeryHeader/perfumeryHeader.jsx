@@ -5,7 +5,7 @@ export default function PerfumeryHeader(){
   const location = useLocation();
   const headerPages = [
     {path:'/main', pageName:'mainPage', label:'Slay💅Star'},
-    {path:'/main', pageName:'mainPage', label:'Каталог товаров'},
+    {path:'/catalog', pageName:'catalog', label:'Каталог товаров'},
     {path:'/cabinet', pageName:'cabinet', label:'Личный кабинет'}
   ];
 
