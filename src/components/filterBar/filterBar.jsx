@@ -3,12 +3,20 @@ import PerfumeryCheckbox from '../perfumeryCheckbox/perfumeryCheckbox';
 import PerfumerySlider from '../perfumerySlider/perfumerySlider';
 import PerfumeryScrollSearcher from '../perfumeryScrollSearcher/perfumeryScrollSearcher';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { brandsService } from '../../api/services/brandsService';
 
+async function fetchData(setBrands){
+  let localBrandsList = [];
+
+  localBrandsList = await brandsService.getBrands();
+  setBrands(localBrandsList);
+};
 
 function FilterBar({
   onSearch
 }){
+  const [brands, setBrands] = useState([]);
   const navigate = useNavigate();
   function createDefaultSearchArgs() {
     return {
@@ -87,6 +95,11 @@ function FilterBar({
     }
   };
 
+  useEffect(() => {
+    fetchData(setBrands);
+  }, []);
+
+  console.log(brands);
   return(
     <div className='filterBar-container'>
       <div className='filterBar-container-header'>Поиск по фильтру</div>
@@ -117,13 +130,13 @@ function FilterBar({
       <div ref={brandRef} className='filterBar-element-container brands'>
         <div className='filterBar-header'>Бренды</div>
         <PerfumeryScrollSearcher
-        elements={Array.from({ length: 10 }).map((_, i) => (
-          <PerfumeryCheckbox 
-            key={i}
-            elementId={`brand-${i}`}
-            id={`brand-${i}`}
-            labelText={`Брбр Патапим${i}`}
-          />
+          elements={brands.map((brand) => (
+            <PerfumeryCheckbox 
+              key={brand.id}
+              elementId={`brand-${brand.id}`}
+              id={`brand-${brand.id}`}
+              labelText={`${brand.name}`}
+            />
         ))}
         whatFind="brands"
         />

@@ -7,6 +7,8 @@ import ProductCard from '../../components/productCard/productCard';
 import SearchPaginator from '../../components/searchPaginator/searchPaginator';
 
 async function fetchProducts(searchArgs, setProducts) {
+  if(searchArgs == null) return;
+
   let localProductList = [];
 
   ////////////// ВЫЗОВ ПРОДУКТОВ ПО БРЕНДАМ
@@ -113,7 +115,7 @@ function SearchPage(){
             ))}
           </div>
           )
-        : ("Попробуйте изменить фильтры поиска, чтобы найти больше товаров!")
+        : (<div className='search-page-nothing'>Попробуйте изменить фильтры поиска, чтобы найти больше товаров!</div>)
         }
         <div className='main-page-filter-bar'>
           <FilterBar onSearch={updateProducts} />

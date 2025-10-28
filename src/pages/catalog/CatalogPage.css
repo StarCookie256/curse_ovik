@@ -1,4 +1,68 @@
 .brands-page-container{
   display: flex;
   flex-direction: column;
+  padding: 2rem 15rem 1rem 15rem;
+  color: #007170;
+}
+
+.brands-page-navigations-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-top: 2px solid #6fc3c4;
+  background: rgb(193, 229, 233, 0.5);
+  padding-left: 0.5rem;
+}
+
+.brands-page-navigations-title{
+  font-family: 'HeaderFont';
+  font-size: 2rem;
+  margin-right: 2rem;
+}
+
+.brands-page-navigations{
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* .brands-page-navigation{
+
+} */
+
+.brands-page-brands-container{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  border-top: 2px dashed #6fc3c4;
+}
+
+.brands-page-brand-letter{
+  margin-right: 1rem;
+  font-family: 'HeaderFont';
+  font-size: 2rem;
+  text-shadow: 0 0 2.8rem #007170;
+}
+
+.brands-page-brands{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.brands-page-brand{
+  text-decoration: none;
+  color: #6fc3c4;
+  text-shadow: 0px 0px 2.7rem #007170;
+  transition: color 0.3s ease-in-out;
+}
+
+.brands-page-brand:hover{
+  color: rgb(213, 3, 102);
+  text-shadow: 0px 0px 2.7rem rgb(213, 3, 102, 0.9);
 }
