@@ -22,7 +22,7 @@
   max-width: 75%;
   min-width: 75%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
+  grid-template-columns: repeat(auto-fit, 12.5rem);
   gap: 1rem;
   align-content: flex-start;
   min-height: 0;

@@ -17,8 +17,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* {!shouldHideDecor && <PerfumeryHeader />} */}
         <PerfumeryHeader />
+        <div className="main-content">
           <Routes>
             <Route
               path="/login"
@@ -42,8 +42,8 @@ function App() {
               }
             />
           </Routes>
+        </div>
         <PerfumeryFooter />
-        {/* {!shouldHideDecor && <PerfumeryFooter />} */}
       </div>
     </Router>
   );

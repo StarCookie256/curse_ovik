@@ -62,24 +62,6 @@ const mockBrandsService = {
     }
     
     return brand;
-  },
-
-  updatebrand: async (id, brandData) => {
-    await new Promise(resolve => setTimeout(resolve, 600));
-    
-    const brandIndex = mockBrands.findIndex(p => p.id === parseInt(id));
-    if (brandIndex === -1) {
-      throw new Error('Бренд не найден');
-    }
-    
-    const updatedbrand = {
-      ...mockBrands[brandIndex],
-      ...brandData
-    };
-    
-    console.log('Обновлен бренд:', updatedbrand);
-    
-    return updatedbrand;
   }
 };
 

@@ -46,16 +46,17 @@ function BrandPage(){
   return(
     <div className='brand-page-container'>
 
+      <div className='brand-page-back-container'>
+        <a className='brand-page-back' href="/catalog">Каталог</a>
+        <span> / {brand.name}</span>
+      </div>
+
       <div className='brand-page-info-container'>
         <div className='brand-page-title'>
           {brand.name}
         </div>
         <div className='brand-page-description'>
-            Описание {brand.name} описание {brand.name} описание {brand.name} описание {brand.name} 
-            описание {brand.name} описание {brand.name} описание {brand.name} описание {brand.name} 
-            описание {brand.name} описание {brand.name} описание {brand.name} описание {brand.name} 
-            описание {brand.name} описание {brand.name} описание {brand.name} описание {brand.name} 
-            описание {brand.name} описание {brand.name} описание {brand.name} 
+            Здесь представлена коллекция ароматов от парфюмерного бренда {brand.name}. Приоритетом нашей компании является реализация исключительно сертифицированной парфюмерии, и продукция {brand.name} не является исключением — ее аутентичность подтверждена покупателями и защищена гарантийными обязательствами. С полным описанием и ценами можно ознакомиться на страницах товаров.
         </div>
       </div>
 
