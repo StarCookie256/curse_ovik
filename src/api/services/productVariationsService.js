@@ -2,8 +2,32 @@
 const mockProductVariations = [
   {
     id: 1,
-    productId: 1,
+    productId: 3,
     category: "Парфюмерная вода",
+    price: 1999,
+    volume: 50,
+    stock: 294
+  },
+  {
+    id: 1,
+    productId: 2,
+    category: "Туалетная вода",
+    price: 1999,
+    volume: 50,
+    stock: 294
+  },
+  {
+    id: 1,
+    productId: 5,
+    category: "Пуки каки",
+    price: 1999,
+    volume: 50,
+    stock: 294
+  },
+  {
+    id: 1,
+    productId: 6,
+    category: "Каки пуки",
     price: 1999,
     volume: 50,
     stock: 294

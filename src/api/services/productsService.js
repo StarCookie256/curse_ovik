@@ -11,7 +11,10 @@ const mockProducts = [
     sPrice: 20999,
     gender: 'male',
     fVolume: 5,
-    sVolume: 200
+    sVolume: 200,
+    country: "РА-СИ-Я",
+    manufactureYear: 2010,
+    expirationDate: "36 месяцев с момента апробирования"
   },
   {
     id: 2,
@@ -24,7 +27,10 @@ const mockProducts = [
     sPrice: 20999,
     gender: 'male',
     fVolume: 100,
-    sVolume: 500
+    sVolume: 500,
+    country: "РА-СИ-Я",
+    manufactureYear: 2010,
+    expirationDate: "36 месяцев с момента апробирования"
   },
   {
     id: 3,
@@ -37,7 +43,10 @@ const mockProducts = [
     sPrice: 20999,
     gender: 'male',
     fVolume: 200,
-    sVolume: 700
+    sVolume: 700,
+    country: "РА-СИ-Я",
+    manufactureYear: 2010,
+    expirationDate: "36 месяцев с момента апробирования"
   },
   {
     id: 4,

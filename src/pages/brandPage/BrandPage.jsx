@@ -28,7 +28,7 @@ function BrandPage(){
       fetchData(brandId.id, setProducts, setBrand)
     }
     catch(error){
-      console.error('Error loading user data:', error);
+      console.error('Error loading brand data:', error);
     }
     finally{
       setLoading(false);
