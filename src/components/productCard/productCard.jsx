@@ -1,4 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import './productCard.css';
+import { brandsService } from '../../api/services/brandsService';
+import { useEffect, useState } from 'react';
+
+async function fetchData(brand, setBrandId){
+  let localBrand = await brandsService.getBrandByName(brand);
+
+  setBrandId(localBrand.id);
+};
 
 function ProductCard({
   id,
@@ -11,8 +20,19 @@ function ProductCard({
   sPrice,
   gender
 }){
+  const navigate = useNavigate();
+  const [brandId, setBrandId] = useState();
+
+  useEffect(() => {
+    fetchData(brand, setBrandId);
+  }, [brand]);
+
+  const productPageNav = () => {
+    navigate(`/catalog/${brandId}/${id}`);
+  }
+
   return(
-    <div className='product-card-container'>
+    <div className='product-card-container' onClick={productPageNav}>
       <div className='product-card-img-container'>
         <img className="product-card-img"
           src={image} 

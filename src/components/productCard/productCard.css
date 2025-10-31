@@ -11,6 +11,7 @@
   position: relative;
   gap: 16px;
   align-items: stretch;
+  cursor: pointer;
 }
 
 .product-card-container:hover {

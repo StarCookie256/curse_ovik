@@ -9,6 +9,7 @@ import CabinetPage from './pages/cabinet/CabinetPage';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import CatalogPage from './pages/catalog/CatalogPage';
 import BrandPage from './pages/brandPage/BrandPage';
+import ProductPage from './pages/productPage/ProductPage';
 
 function App() {
   // const hideDecorRoutes = ["/login"]; // страницы, где скрываем декор всякий
@@ -31,7 +32,8 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/main" element={<MainPage />} />
             <Route path="/catalog" element={<CatalogPage />} />
-            <Route path="/brands/:id" element={<BrandPage />} />
+            <Route path="/catalog/:brandId" element={<BrandPage />} />
+            <Route path="/catalog/:brandId/:productId" element={<ProductPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route
               path="/cabinet"

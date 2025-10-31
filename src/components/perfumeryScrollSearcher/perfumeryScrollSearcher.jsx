@@ -46,8 +46,8 @@ function PerfumeryScrollSearcher({
   return(
     <div className='perfumeryScrollSearcher-container'>
       <input className='perfumeryScrollSearcher-input' type='text' onChange={searchItems}></input>
-        <div className='perfumeryScrollSearcher-items'>
-          {elements}
+      <div className='perfumeryScrollSearcher-items'>
+        {elements}
       </div>
     </div>
   );

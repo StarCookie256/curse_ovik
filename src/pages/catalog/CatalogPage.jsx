@@ -46,10 +46,14 @@ function CatalogPage(){
           <div className='brands-page-brands-container'>
             <h3 className='brands-page-brand-letter'>{brandNavigation}</h3>
             <div className='brands-page-brands'>
-              {brands.map((brand) => (
-                (brand.firstLetter === brandNavigation) &&
-                (<a className='brands-page-brand' href={`/brands/${brand.id}`}>{brand.name}</a>)
-              ))}
+              {brands.map((brand) => {
+                const brandId = brand.id;
+
+                return(
+                  (brand.firstLetter === brandNavigation) &&
+                  (<a className='brands-page-brand' href={`/catalog/${brandId}`}>{brand.name}</a>)
+                );
+              })}
             </div>
           </div>
         );

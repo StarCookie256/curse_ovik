@@ -62,6 +62,15 @@ const mockBrandsService = {
     }
     
     return brand;
+  },
+
+  getBrandByName: async (name) => {    
+    const brand = mockBrands.find(p => p.name === name);
+    if (!brand) {
+      throw new Error('Бренд не найден');
+    }
+    
+    return brand;
   }
 };
 

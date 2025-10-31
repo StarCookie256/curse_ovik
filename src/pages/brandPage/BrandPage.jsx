@@ -17,7 +17,7 @@ async function fetchData(brandId, setProducts, setBrand){
 };
 
 function BrandPage(){
-  const brandId = useParams();
+  const { brandId } = useParams();
   const [brand, setBrand] = useState();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ function BrandPage(){
   useEffect(() => {
     try{
       setLoading(true);
-      fetchData(brandId.id, setProducts, setBrand)
+      fetchData(brandId, setProducts, setBrand)
     }
     catch(error){
       console.error('Error loading brand data:', error);

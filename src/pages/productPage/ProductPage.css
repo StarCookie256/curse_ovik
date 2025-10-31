@@ -1,0 +1,117 @@
+.product-page-container{
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 20rem 2rem 20rem;
+}
+
+.product-page-back-container{
+  display: flex;
+  margin-bottom: 0.5rem;
+  color: rgb(0, 113, 112, 0.55);
+}
+
+.product-page-back{
+  text-decoration: none;
+  color: rgb(255, 166, 104, 0.7);
+  transition: color 0.3s ease-in-out;
+}
+
+.product-page-back:hover{
+  color: rgb(0, 113, 112, 0.7);
+}
+
+.product-page-product-card{
+  color: #fe7d31;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1rem;
+  border: 3px solid rgb(238, 169, 74, 0.9);
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.product-page-image-container{
+  margin: auto;
+  max-width: 50%;
+  min-width: 20rem;
+  min-height: 30rem;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 13px;
+  overflow: hidden;
+  border: 4px dashed rgb(0, 113, 112, 0.65);
+  border-radius: 29px;
+}
+
+.product-page-image{
+  display: block;
+  height:100%;
+  width: 100%;
+  border-radius: 29px;
+  object-fit: contain;
+}
+
+.product-page-product-card-info{
+  margin: auto;
+  max-width: 50%;
+  min-height: 30rem;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.product-page-title-gender{
+  color: rgb(0, 113, 112, 0.5);
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.product-page-title{
+  font-size:2.4rem;
+  margin-top: 0.2rem;
+  font-family: 'HeaderFont';
+}
+
+.product-page-details{
+  font-size: 1.2rem;
+  border-top: 4px dotted rgb(0, 113, 112, 0.65);
+  border-bottom: 4px dotted rgb(0, 113, 112, 0.65);
+}
+
+/* .product-page-text{
+
+} */
+
+.product-page-text span{
+  color: rgb(0, 113, 112, 0.65);
+}
+
+/* .product-page-variations-container{
+
+} */
+
+.product-page-section-title{
+  font-family: 'HeaderFont';
+  margin: 1rem 0 1rem 0;
+  padding-bottom: 0.5rem;
+  font-size: 1.8rem;
+  /* background: rgb(193, 229, 233, 0.5); */
+  text-shadow: 0 0 2rem rgb(0, 113, 112, 0.75);
+  border-bottom: 5px dotted #fe7d31;
+  color: rgb(0, 113, 112, 0.8);
+}
+
+.product-page-description{
+  color: rgb(0, 113, 112, 0.6);
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  font-size: 1.1rem;
+  text-align: left;
+}

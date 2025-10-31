@@ -5,18 +5,24 @@ import PerfumeryScrollSearcher from '../perfumeryScrollSearcher/perfumeryScrollS
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { brandsService } from '../../api/services/brandsService';
+import { categoriesService } from '../../api/services/categoriesService';
 
-async function fetchData(setBrands){
+async function fetchData(setBrands, setCategories){
   let localBrandsList = [];
+  let localCategoriesList = [];
 
   localBrandsList = await brandsService.getBrands();
+  localCategoriesList = await categoriesService.getCategories();
+
   setBrands(localBrandsList);
+  setCategories(localCategoriesList);
 };
 
 function FilterBar({
   onSearch
 }){
   const [brands, setBrands] = useState([]);
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
   function createDefaultSearchArgs() {
     return {
@@ -96,10 +102,9 @@ function FilterBar({
   };
 
   useEffect(() => {
-    fetchData(setBrands);
+    fetchData(setBrands, setCategories);
   }, []);
 
-  console.log(brands);
   return(
     <div className='filterBar-container'>
       <div className='filterBar-container-header'>Поиск по фильтру</div>
@@ -108,12 +113,12 @@ function FilterBar({
         <div className='filterBar-header'>Пол</div>
         <div ref={genderRef} className='filterBar-genders'>
           <PerfumeryCheckbox 
-          id="women"
-          labelText="Для женщин"
+            id="women"
+            labelText="Для женщин"
           />
           <PerfumeryCheckbox 
-          id="man"
-          labelText="Для мужчин"
+            id="man"
+            labelText="Для мужчин"
           />
         </div>
       </div>
@@ -121,9 +126,9 @@ function FilterBar({
       <div ref={priceRef} className='filterBar-element-container price'>
         <div className='filterBar-header'>Цена</div>
         <PerfumerySlider
-        firstMaxValue = {0}
-        secondMaxValue = {99999}
-        valueType = "руб."
+          firstMaxValue = {0}
+          secondMaxValue = {99999}
+          valueType = "руб."
         />
       </div>
 
@@ -145,12 +150,12 @@ function FilterBar({
       <div ref={categoryRef} className='filterBar-element-container categories'>
         <div className='filterBar-header'>Категории</div>
         <PerfumeryScrollSearcher
-        elements={Array.from({ length: 10 }).map((_, i) => (
+        elements={categories.map((category) => (
           <PerfumeryCheckbox 
-            key={i}
-            elementId={`category-${i}`}
-            id={`category-${i}`}
-            labelText={`Пельмени${i}`}
+            key={category.id}
+            elementId={`category-${category.id}`}
+            id={`category-${category.id}`}
+            labelText={`${category.name}`}
           />
         ))}
         whatFind="categories"
@@ -160,9 +165,9 @@ function FilterBar({
       <div ref={volumeRef} className='filterBar-element-container volume'>
         <div className='filterBar-header'>Объём</div>
         <PerfumerySlider
-        firstMaxValue = {0}
-        secondMaxValue = {1000}
-        valueType = "мл."
+          firstMaxValue = {0}
+          secondMaxValue = {1000}
+          valueType = "мл."
         />
       </div>
 

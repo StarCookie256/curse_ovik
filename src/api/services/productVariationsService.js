@@ -9,7 +9,7 @@ const mockProductVariations = [
     stock: 294
   },
   {
-    id: 1,
+    id: 2,
     productId: 2,
     category: "Туалетная вода",
     price: 1999,
@@ -17,7 +17,7 @@ const mockProductVariations = [
     stock: 294
   },
   {
-    id: 1,
+    id: 3,
     productId: 5,
     category: "Пуки каки",
     price: 1999,
@@ -25,9 +25,41 @@ const mockProductVariations = [
     stock: 294
   },
   {
-    id: 1,
+    id: 4,
     productId: 6,
     category: "Каки пуки",
+    price: 1999,
+    volume: 50,
+    stock: 294
+  },
+  {
+    id: 5,
+    productId: 3,
+    category: "Парфюмерная вода",
+    price: 1999,
+    volume: 50,
+    stock: 294
+  },
+  {
+    id: 6,
+    productId: 3,
+    category: "Парфюмерная вода",
+    price: 1999,
+    volume: 50,
+    stock: 294
+  },
+  {
+    id: 7,
+    productId: 3,
+    category: "Парфюмерная вода",
+    price: 1999,
+    volume: 50,
+    stock: 294
+  },
+  {
+    id: 8,
+    productId: 3,
+    category: "Парфюмерная вода",
     price: 1999,
     volume: 50,
     stock: 294
