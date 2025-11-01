@@ -76,6 +76,7 @@
 }
 
 .header-bottom-items{
+  font-family: 'NormalTextFont' !important;
   overflow: visible;
   display: flex;
   flex-direction: row;
