@@ -10,6 +10,7 @@ import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import CatalogPage from './pages/catalog/CatalogPage';
 import BrandPage from './pages/brandPage/BrandPage';
 import ProductPage from './pages/productPage/ProductPage';
+import BasketPage from './pages/basketPage/BasketPage';
 
 function App() {
   // const hideDecorRoutes = ["/login"]; // страницы, где скрываем декор всякий
@@ -40,6 +41,14 @@ function App() {
               element={
                 <ProtectedRoute requireAuth={true}>
                   <CabinetPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/basket"
+              element={
+                <ProtectedRoute requireAuth={true}>
+                  <BasketPage />
                 </ProtectedRoute>
               }
             />

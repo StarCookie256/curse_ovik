@@ -47,22 +47,8 @@ const mockBasketService = {
     return productsCount;
   },
 
-  updateBasket: async (id, productData) => {
-    await new Promise(resolve => setTimeout(resolve, 600));
-    
-    const productIndex = mockBasketProducts.findIndex(p => p.id === parseInt(id));
-    if (productIndex === -1) {
-      throw new Error('Товар не найден');
-    }
-    
-    const updatedProduct = {
-      ...mockBasketProducts[productIndex],
-      ...productData
-    };
-    
-    console.log('Обновлен товар:', updatedProduct);
-    
-    return updatedProduct;
+  updateBasket: async (id) => {    
+    console.log('Вау молодец!',id);
   }
 };
 
