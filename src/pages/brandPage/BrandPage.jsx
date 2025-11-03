@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { brandsService } from '../../api/services/brandsService';
 import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
+import { Link } from 'react-router-dom';
 
 async function fetchData(brandId, setProducts, setBrand){
   let localProductsList = [];
@@ -37,7 +38,7 @@ function BrandPage(){
 
   if(loading){
     return(
-      <div className='cabinet-page-container'>
+      <div className='loading-container'>
         Загрузка...
       </div>
     );
@@ -47,7 +48,12 @@ function BrandPage(){
     <div className='brand-page-container'>
 
       <div className='brand-page-back-container'>
-        <a className='brand-page-back' href="/catalog">Каталог</a>
+        <Link 
+          className='brand-page-back' 
+          to="/catalog"
+        >
+          Каталог
+        </Link>
         <span> / {brand.name}</span>
       </div>
 

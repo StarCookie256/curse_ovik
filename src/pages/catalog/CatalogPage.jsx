@@ -1,6 +1,7 @@
 import './CatalogPage.css';
 import { brandsService } from '../../api/services/brandsService';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 async function fetchData(setBrands, setBrandNavigations){
   let localBrandsList = [];
@@ -51,7 +52,14 @@ function CatalogPage(){
 
                 return(
                   (brand.firstLetter === brandNavigation) &&
-                  (<a className='brands-page-brand' href={`/catalog/${brandId}`}>{brand.name}</a>)
+                  (
+                    <Link 
+                      className='brands-page-brand' 
+                      to={`/catalog/${brandId}`}
+                    >
+                      {brand.name}
+                    </Link>
+                  )
                 );
               })}
             </div>

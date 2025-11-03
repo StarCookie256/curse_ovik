@@ -4,13 +4,7 @@ import { basketService } from '../../api/services/basketService';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
-async function fetchData(setBasketCount){
-  let localBasketCount = await basketService.getBasketProductsCount();
-
-  setBasketCount(localBasketCount);
-}
-
-export default function PerfumeryHeader(){
+function PerfumeryHeader(){
   const {isAuthenticated} = useAuth();
   const location = useLocation();
   const [basketCount, setBasketCount] = useState();
@@ -26,17 +20,20 @@ export default function PerfumeryHeader(){
   ];
 
   useEffect(() => {
-    try{
-      setLoading(true);
-      fetchData(setBasketCount);
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const count = await basketService.getBasketProductsCount();
+        setBasketCount(count);
+      } catch(error) {
+        console.error('Error loading basket count:', error);
+      } finally {
+        setLoading(false);
+      }
     }
-    catch(error){
-      console.error('Error loading user data:', error);
-    }
-    finally{
-      setLoading(false);
-    }
-  }, [basketCount]);
+
+    fetchData();
+  }, []);
 
   if(loading){
     return(
@@ -85,3 +82,5 @@ export default function PerfumeryHeader(){
     </header>
   );
 }
+
+export default PerfumeryHeader;

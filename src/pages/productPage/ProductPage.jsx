@@ -1,7 +1,7 @@
 import './ProductPage.css';
 import { productService } from '../../api/services/productsService';
 import { productVariationsService } from '../../api/services/productVariationsService';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PerfumeryScrollSearcher from '../../components/perfumeryScrollSearcher/perfumeryScrollSearcher';
 import ProductVariationLine from '../../components/productVariationLine/ProductVariationLine';
@@ -39,7 +39,7 @@ function ProductPage(){
 
   if(loading){
     return(
-      <div className='cabinet-page-container'>
+      <div className='loading-container'>
         Загрузка...
       </div>
     );
@@ -49,9 +49,19 @@ function ProductPage(){
     <div className='product-page-container'>
 
       <div className='product-page-back-container'>
-        <a className='product-page-back' href="/catalog">Каталог</a>
+        <Link 
+          className='product-page-back' 
+          to="/catalog"
+        >
+          Каталог
+        </Link>
         <span> / </span>
-        <a className='product-page-back' href={`/catalog/${brandId}`}>{product.brand}</a>
+        <Link 
+          className='product-page-back' 
+          to={`/catalog/${brandId}`}
+        >
+          {product.brand}
+        </Link>
         <span> / {product.name}</span>
       </div>
 

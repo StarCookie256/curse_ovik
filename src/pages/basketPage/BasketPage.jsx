@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import BasketProduct from '../../components/basketProduct/BasketProduct';
 import PerfumeryScrollSearcher from '../../components/perfumeryScrollSearcher/perfumeryScrollSearcher';
 import { useAuth } from '../../components/context/AuthContext';
+import { Link } from 'react-router-dom';
 
 async function fetchData(setTotalPrice, setProducts){
   let localBasket = await basketService.getBasket();
@@ -39,9 +40,14 @@ function BasketPage(){
 
   return(
     <div className='basket-page-container'>
-      
+
       <div className='basket-page-back-container'>
-        <a className='basket-page-back' href="/main">Главная</a>
+        <Link 
+          className='basket-page-back' 
+          to="/main"
+        >
+          Главная
+        </Link>
         <span> / Корзина</span>
       </div>
 
@@ -68,7 +74,12 @@ function BasketPage(){
           <div className='basket-page-total'>Общая цена товаров: <span>{totalPrice} руб.</span></div>
           <div className='basket-page-info'>
             Посылка прибудет на адрес - {user.address}. <br /> 
-            <span>Адрес всегда можно изменить в <a href='/cabinet'>Личном кабинете!</a></span>
+            <span>{'Адрес всегда можно изменить в '}
+              <Link
+                to="/cabinet"
+              >
+                Личном кабинете!
+              </Link></span>
           </div>
         </div>
 
