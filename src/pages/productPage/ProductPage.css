@@ -115,3 +115,13 @@
   font-size: 1.1rem;
   text-align: left;
 }
+
+.perfumeryScrollSearcher-input{
+  display: none;
+}
+
+.perfumeryScrollSearcher-items{
+  max-height: 15rem;
+  min-height: 15rem;
+  gap: 1.4rem;
+}

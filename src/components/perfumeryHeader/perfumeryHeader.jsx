@@ -2,6 +2,7 @@ import './perfumeryHeader.css';
 import { Link, useLocation } from 'react-router-dom';
 import { basketService } from '../../api/services/basketService';
 import { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 async function fetchData(setBasketCount){
   let localBasketCount = await basketService.getBasketProductsCount();
@@ -10,6 +11,7 @@ async function fetchData(setBasketCount){
 }
 
 export default function PerfumeryHeader(){
+  const {isAuthenticated} = useAuth();
   const location = useLocation();
   const [basketCount, setBasketCount] = useState();
   const [loading, setLoading] = useState(true);
@@ -38,7 +40,7 @@ export default function PerfumeryHeader(){
 
   if(loading){
     return(
-      <div className='cabinet-page-container'>
+      <div className='loading-container'>
         Загрузка...
       </div>
     );
@@ -73,7 +75,7 @@ export default function PerfumeryHeader(){
             >
               <div className={`header-item ${page.pageName}`}>
                 {page.label}
-                {page.pageName === 'basket' && <div className='header-basket-count'>{basketCount}</div>}
+                {isAuthenticated && (page.pageName === 'basket' && <div className='header-basket-count'>{basketCount >= 99 ? '99+' : basketCount}</div>)}
               </div>
             </Link>
           ))}

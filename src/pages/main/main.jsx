@@ -6,13 +6,24 @@ import FilterBar from '../../components/filterBar/filterBar';
 
 function MainPage(){
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     productService.getProducts()
       .then(productsData => {
         setProducts(productsData);
       });
+      setLoading(false);
   }, []);
+
+  if(loading){
+    return(
+      <div className='loading-container'>
+        Загрузка...
+      </div>
+    );
+  }
 
   return(
     <div className='main-page-container'>

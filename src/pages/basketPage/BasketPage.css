@@ -1,7 +1,108 @@
 .basket-page-container{
+  display: flex;
+  flex-direction: column;
   padding: 2rem 10rem 2rem 10rem;
+  gap: 1rem;
+}
+
+.basket-page-back-container{
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  color: rgb(140, 86, 182, 0.8) !important;
+}
+
+.basket-page-back{
+  text-decoration: none;
+  color: rgb(140, 86, 182, 0.8);
+  transition: color 0.2s ease-in-out;
+}
+
+.basket-page-back:hover{
+  color: rgb(213, 3, 102);
 }
 
 .basket-card{
+  border: 2px solid #8c56b6;
+  border-top: 5px solid #8c56b6;
+  border-bottom: 5px solid #8c56b6;
+  box-shadow: 0 0 15px rgb(140, 86, 182, 0.6);
+  border-radius: 1rem;
+  padding: 1rem;
+}
 
+.perfumeryScrollSearcher-input{
+  display: none;
+}
+
+.perfumeryScrollSearcher-items{
+  max-height: 30rem;
+  min-height: 30rem;
+  gap: 2rem;
+  padding: 0 1rem 0 1rem;
+}
+
+.basket-page-buy-container{
+  border: 2px solid #8c56b6;
+  border-top: 5px solid #8c56b6;
+  border-bottom: 5px solid #8c56b6;
+  box-shadow: 0 0 15px rgb(140, 86, 182, 0.6);
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.basket-page-buy-info{
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  text-align: left;
+  gap: 0.5rem;
+  color: rgb(85, 16, 103);
+}
+
+.basket-page-total{
+  font-size: 2rem;
+}
+
+.basket-page-total span{
+  color: #d50366;
+}
+
+.basket-page-info span{
+  color: #8c56b6;
+}
+
+.basket-page-info span a{
+  color: rgb(85, 16, 103);
+  transition: color 0.2s ease-in-out;
+}
+
+.basket-page-info span a:hover{
+  color: #d50366;
+}
+
+.basket-page-buy-button-container{
+  align-items: flex-end;
+  width: auto;
+  margin-left: auto;
+}
+
+.basket-page-buy-button{
+  background: rgb(85, 16, 103, 0.9);
+  border: 5px solid #8c56b6;
+  border-radius: 25px;
+  padding: 0.7rem;
+  font-size: 1.4rem;
+  color: #ffaec8;
+  font-family: 'NormalTextFont';
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.basket-page-buy-button:hover{
+  color: rgb(127, 51, 89);
+  background: #ffaec8;
+  border: 5px solid rgb(127, 51, 89);
 }

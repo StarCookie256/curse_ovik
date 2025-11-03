@@ -23,13 +23,13 @@ function BasketProduct({
 
         <div className='basket-product-name'>{productName}</div>
         <div className='basket-product-category'>{categoryName}</div>
-        <div className='basket-product-volume'>{volume}</div>
-        <div className='basket-product-price'>{price}</div>
+        <div className='basket-product-volume'>{volume} мл.</div>
+        <div className='basket-product-price'>{price} руб.</div>
 
         <div className='basket-product-quantity-container'>
-          <button className='basket-product-add'>+</button>
-          <div className='basket-product-quantity'>{quantity}</div>
-          <button className='basket-product-delete'>-</button>
+          <button className='basket-product-quantity-button add'>+</button>
+          <div className='basket-product-quantity'>{quantity} шт.</div>
+          <button className='basket-product-quantity-button delete'>-</button>
         </div>
         
       </div>

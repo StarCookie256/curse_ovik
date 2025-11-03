@@ -42,13 +42,3 @@
   cursor: pointer;
   box-shadow: 0 0 1rem rgb(254, 125, 49, 0.8);
 }
-
-.perfumeryScrollSearcher-input{
-  display: none;
-}
-
-.perfumeryScrollSearcher-items{
-  max-height: 15rem;
-  min-height: 15rem;
-  gap: 1.4rem;
-}
