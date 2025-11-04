@@ -31,11 +31,11 @@
   padding: 1rem;
 }
 
-.perfumeryScrollSearcher-input{
+.basket-page-container .perfumeryScrollSearcher-input{
   display: none;
 }
 
-.perfumeryScrollSearcher-items{
+.basket-page-container .perfumeryScrollSearcher-items{
   max-height: 30rem;
   min-height: 30rem;
   gap: 2rem;

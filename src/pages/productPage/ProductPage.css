@@ -116,11 +116,11 @@
   text-align: left;
 }
 
-.perfumeryScrollSearcher-input{
+.product-page-container .perfumeryScrollSearcher-input{
   display: none;
 }
 
-.perfumeryScrollSearcher-items{
+.product-page-container .perfumeryScrollSearcher-items{
   max-height: 15rem;
   min-height: 15rem;
   gap: 1.4rem;
