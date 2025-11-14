@@ -3,7 +3,7 @@ import { CURRENT_MODE, API_MODE, AUTH_TOKEN_KEY, USER_DATA_KEY, API_BASE_URL } f
 const realAuthService = {
   login: async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/signin`, {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -115,12 +115,7 @@ const realAuthService = {
     }
 
     return await response.json();
-  },
-
-	isHr: async () => {
-		const userData = localStorage.getItem(USER_DATA_KEY);
-		return JSON.parse(userData).isHr;
-	}
+  }
 };
 
 const mockUsers = [

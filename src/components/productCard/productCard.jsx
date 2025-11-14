@@ -22,6 +22,18 @@ function ProductCard({
 }){
   const navigate = useNavigate();
   const [brandId, setBrandId] = useState();
+  const [imgSrc, setImgSrc] = useState("/no_photo.png");
+
+  useEffect(() => {
+    const checkImage = new Image();
+    checkImage.onload = () => {
+      setImgSrc(image); // Картинка существует
+    };
+    checkImage.onerror = () => {
+      setImgSrc("/no_photo.png"); // Картинка не существует
+    };
+    checkImage.src = image;
+  }, [image]);
 
   useEffect(() => {
     fetchData(brand, setBrandId);
@@ -34,9 +46,10 @@ function ProductCard({
   return(
     <div className='product-card-container' onClick={productPageNav}>
       <div className='product-card-img-container'>
-        <img className="product-card-img"
-          src={image} 
-          alt={name || "Изображение"} 
+        <img 
+          className="product-card-img"
+          src={imgSrc} 
+          alt={name} 
         />  
       </div>
       <div className='product-card-info-container'>

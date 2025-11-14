@@ -21,12 +21,22 @@ function ProductPage(){
   const [product, setProduct] = useState();
   const [productVariations, setProductVariations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [imgSrc, setImgSrc] = useState("/no_photo.png");
   
   useEffect(() => {
     try{
       setLoading(true);
       console.log(productId);
       fetchData(productId, setProduct, setProductVariations)
+
+      const checkImage = new Image();
+      checkImage.onload = () => {
+        setImgSrc(product.image); // Картинка существует
+      };
+      checkImage.onerror = () => {
+        setImgSrc("/no_photo.png"); // Картинка не существует
+      };
+      checkImage.src = product.image;
     }
     catch(error){
       console.error('Error loading user data:', error);
@@ -36,6 +46,16 @@ function ProductPage(){
     }
   }, [productId]);
 
+  // useEffect(() => {
+  //   const checkImage = new Image();
+  //   checkImage.onload = () => {
+  //     setImgSrc(product.image); // Картинка существует
+  //   };
+  //   checkImage.onerror = () => {
+  //     setImgSrc("/no_photo.png"); // Картинка не существует
+  //   };
+  //   checkImage.src = product.image;
+  // }, [product.image]);
 
   if(loading){
     return(
@@ -69,7 +89,7 @@ function ProductPage(){
         <div className='product-page-image-container'>
           <img 
             className='product-page-image' 
-            src={product.image}
+            src={imgSrc}
             alt={product.name}
           />
         </div>

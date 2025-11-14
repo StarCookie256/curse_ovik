@@ -1,3 +1,55 @@
+import { CURRENT_MODE, API_MODE, API_BASE_URL } from '../config';
+
+const realProductsService = {
+  getProductsSearch: async (filters, pagination) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/product/search`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          filters: filters,
+          pagination: pagination
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при запросе на поиск');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Products search error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
+  },
+
+  getProductsByBrand: async (requestData) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/product/bybrand`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при запросе на поиск');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Products fetch error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
+  },
+}
 
 const mockProducts = [
   {
@@ -5,7 +57,7 @@ const mockProducts = [
     name: 'Газики фембоев',
     brand: 'Брбр Патапим0',
     category: 'Пельмени0',
-    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    image: '/no_photo.png',
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
@@ -21,7 +73,7 @@ const mockProducts = [
     name: 'Газики фембоев',
     brand: 'Брбр Патапим1',
     category: 'Пельмени1',
-    image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
+    image: '',
     desc: 'Великолепные газики астольфо',
     fPrice: 1999,
     sPrice: 20999,
@@ -338,4 +390,6 @@ const mockProductsService = {
   }
 };
 
-export const productService = mockProductsService;
+export const productService = CURRENT_MODE === API_MODE.MOCK 
+  ? mockProductsService 
+  : realProductsService;
