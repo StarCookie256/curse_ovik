@@ -4,7 +4,7 @@ const realProductsService = {
   getProductsSearch: async (filters, pagination) => {
     try {
       const response = await fetch(`${API_BASE_URL}/product/search`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -49,6 +49,28 @@ const realProductsService = {
       throw new Error('Ошибка соединения с сервером');
     }
   },
+
+  getProductsOfDay: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/product/ofday`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при запросе товары дня');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Products fetch error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
+  }
 }
 
 const mockProducts = [
