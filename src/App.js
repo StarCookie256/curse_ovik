@@ -11,6 +11,7 @@ import CatalogPage from './pages/catalog/CatalogPage';
 import BrandPage from './pages/brandPage/BrandPage';
 import ProductPage from './pages/productPage/ProductPage';
 import BasketPage from './pages/basketPage/BasketPage';
+import RegisterPage from './pages/register/RegisterPage';
 
 function App() {
   // const hideDecorRoutes = ["/login"]; // страницы, где скрываем декор всякий
@@ -27,6 +28,14 @@ function App() {
               element={
                 <ProtectedRoute requireAuth={false}>
                   <LoginPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <ProtectedRoute requireAuth={false}>
+                  <RegisterPage />
                 </ProtectedRoute>
               }
             />

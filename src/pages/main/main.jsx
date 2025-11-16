@@ -10,7 +10,7 @@ function MainPage(){
 
   useEffect(() => {
     setLoading(true);
-    productService.getProducts()
+    productService.getProductsOfDay()
       .then(productsData => {
         setProducts(productsData);
       });

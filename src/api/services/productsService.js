@@ -52,10 +52,12 @@ const realProductsService = {
 
   getProductsOfDay: async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/product/ofday`, {
+      const response = await fetch(`${API_BASE_URL}/Product/ofday`, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          // Если нужна авторизация:
+          // 'Authorization': `Bearer ${token}`
         }
       });
 

@@ -51,6 +51,22 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (formDataToSend) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const result = await authService.register(formDataToSend);
+      setUser(result.user);
+      return result;
+    } catch (err) {
+      setError(err.message);
+      setUser(null);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const logout = async () => {
     try {
       setLoading(true);
@@ -79,6 +95,7 @@ export const AuthProvider = ({ children }) => {
     loading,
     error,
     login,
+    register,
     logout,
     refreshProfile,
     isAuthenticated: !!user

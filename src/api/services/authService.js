@@ -21,21 +21,21 @@ const realAuthService = {
       localStorage.setItem(AUTH_TOKEN_KEY, data.accessToken);
       
       // Получаем данные пользователя
-      const userResponse = await fetch(`${API_BASE_URL}/auth/profile`, {
-        headers: {
-          'Authorization': `Bearer ${data.accessToken}`
-        },
-        credentials: 'include',
-      });
+      // const userResponse = await fetch(`${API_BASE_URL}/auth/profile`, {
+      //   headers: {
+      //     'Authorization': `Bearer ${data.accessToken}`
+      //   },
+      //   credentials: 'include',
+      // });
 
-      if (userResponse.ok) {
-        const userData = await userResponse.json();
-        localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
-        return {
-          token: data.accessToken,
-          user: userData
-        };
-      }
+      // if (userResponse.ok) {
+      //   const userData = await userResponse.json();
+      //   localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
+      //   return {
+      //     token: data.accessToken,
+      //     user: userData
+      //   };
+      // }
 
       return {
         token: data.accessToken,
@@ -43,6 +43,50 @@ const realAuthService = {
       };
     } catch (error) {
       console.error('Login error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
+  },
+
+  register: async (formDataToSend) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: 'POST',
+        body: formDataToSend,
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка регистрации');
+      }
+
+      const data = await response.json();
+      
+      // Сохраняем токен
+      localStorage.setItem(AUTH_TOKEN_KEY, data.accessToken);
+      
+      // Получаем данные пользователя
+      // const userResponse = await fetch(`${API_BASE_URL}/auth/profile`, {
+      //   headers: {
+      //     'Authorization': `Bearer ${data.accessToken}`
+      //   },
+      //   credentials: 'include',
+      // });
+
+      // if (userResponse.ok) {
+      //   const userData = await userResponse.json();
+      //   localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
+      //   return {
+      //     token: data.accessToken,
+      //     user: userData
+      //   };
+      // }
+
+      return {
+        token: data.accessToken,
+        user: null
+      };
+    } catch (error) {
+      console.error('Register error:', error);
       throw new Error('Ошибка соединения с сервером');
     }
   },
