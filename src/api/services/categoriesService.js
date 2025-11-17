@@ -1,3 +1,51 @@
+import { CURRENT_MODE, API_MODE, API_BASE_URL } from '../config';
+
+const realCategoriesService = {
+  getCategoryById: async (requestData) => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/Category/byid`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData)
+        });
+  
+        if (!response.ok) {
+          throw new Error('Ошибка при запросе на поиск');
+        }
+  
+        const data = await response.json();
+  
+        return data;
+      } catch (error) {
+        console.error('Category fetch error:', error);
+        throw new Error('Ошибка соединения с сервером');
+      }
+    },
+  
+    getCategories: async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/Category/all`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+  
+        if (!response.ok) {
+          throw new Error('Ошибка при запросе товары дня');
+        }
+  
+        const data = await response.json();
+  
+        return data;
+      } catch (error) {
+        console.error('Category fetch error:', error);
+        throw new Error('Ошибка соединения с сервером');
+      }
+    }
+}
 
 const mockCategories = [
   {
@@ -57,4 +105,6 @@ const mockCategoriesService = {
   }
 };
 
-export const categoriesService = mockCategoriesService;
+export const categoriesService = CURRENT_MODE === API_MODE.MOCK 
+  ? mockCategoriesService 
+  : realCategoriesService;

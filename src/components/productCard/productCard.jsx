@@ -4,6 +4,7 @@ import { brandsService } from '../../api/services/brandsService';
 import { useEffect, useState } from 'react';
 
 async function fetchData(brand, setBrandId){
+
   let localBrand = await brandsService.getBrandByName(brand);
 
   setBrandId(localBrand.id);

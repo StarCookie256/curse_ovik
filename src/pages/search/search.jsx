@@ -6,48 +6,18 @@ import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
 import SearchPaginator from '../../components/searchPaginator/searchPaginator';
 
-async function fetchProducts(searchArgs, setProducts) {
-  if(searchArgs == null) return;
+async function fetchProducts(searchArgs, page, setProducts, setPageMax) {
+  if(searchArgs == null || page == null) return;
 
   let localProductList = [];
 
-  ////////////// ВЫЗОВ ПРОДУКТОВ ПО БРЕНДАМ
-  if (searchArgs?.brands?.length > 0) {
-    const productPromises = searchArgs.brands.map(brand => 
-      productService.getProductsByBrand(brand)
-    );
-    
-    const productsArrays = await Promise.all(productPromises);
-    localProductList = productsArrays.flat();
-  } 
-  else {
-    localProductList = await productService.getProducts();
+  const requestData = new FormData();
+
+  let pageObj = {
+    'Page': page,
+    'PageSize': PRODUCTS_PER_PAGE
   }
-  ////////////
 
-  ////////////// СОРТИРОВКА ПО ПОЛУ
-  if (searchArgs?.gender?.length === 1) {
-    const targetGender = searchArgs.gender[0];
-    localProductList = localProductList.filter(p => p.gender === targetGender);
-  }
-  //////////////
-
-  ////////////// СОРТИРОВКА ПО КАТЕГОРИЯМ
-  if(searchArgs?.categories?.length > 0){
-    let sortedList = searchArgs.categories.map(category => {
-      return localProductList.filter(p => p.category === category)
-    })
-    localProductList = sortedList.flat();
-  }
-  //////////////
-
-  ////////////// СОРТИРОВКА ПО ЦЕНАМ
-  localProductList = localProductList.filter(p => p.fPrice <= searchArgs.priceValues[1] && p.sPrice >= searchArgs.priceValues[0]);
-  //////////////
-
-  ////////////// СОРТИРОВКА ПО ОБЪЁМУ
-  localProductList = localProductList.filter(p => p.fVolume <= searchArgs.volumeValues[1] && p.sVolume >= searchArgs.volumeValues[0]);
-  //////////////
   console.log(localProductList.length);
   setProducts(localProductList);
 }
@@ -56,22 +26,19 @@ const PRODUCTS_PER_PAGE = 18;
 const getTotalPageCount = (productsCount) => Math.ceil(productsCount / PRODUCTS_PER_PAGE);
 
 function SearchPage(){
-  ////////////// РАБОТА С ПЕРЕДАЧЕЙ ДАННЫХ НА СТРАНИЦУ
   const location = useLocation();
   const searchArgs = location.state;
   const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageMax, setPageMax] = useState(1);
 
   const updateProducts = (newSearchArgs) => {
-    fetchProducts(newSearchArgs, setProducts);
+    fetchProducts(newSearchArgs, page, setProducts, setPageMax);
   };
 
-  useEffect(() => {
-    fetchProducts(searchArgs, setProducts);
+  useEffect(() => { 
+    fetchProducts(searchArgs, page, setProducts, setPageMax);
   }, [searchArgs]);
-  //////////////
-
-  ////////////// РАБОТА С ПАГИНАЦИЕЙ
-  const [page, setPage] = useState(1);
 
   // переход на след страницу
   const handleNextPageClick = useCallback(() => {
@@ -89,7 +56,6 @@ function SearchPage(){
 
     setPage(prev > 0 ? prev : current);
   }, [page]);
-  //////////////
 
   return(
     <div className='main-page-container'>
@@ -128,9 +94,9 @@ function SearchPage(){
             onPrevPageClick={handlePrevPageClick}
             disable={{
               left: page === 1,
-              right: page === getTotalPageCount(products.length),
+              right: page === pageMax,
             }}
-            nav={{ current: page, total: getTotalPageCount(products.length) }}
+            nav={{ current: page, total: pageMax }}
           />
         )}
       </div>

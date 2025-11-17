@@ -9,9 +9,14 @@ import { Link } from 'react-router-dom';
 async function fetchData(brandId, setProducts, setBrand){
   let localProductsList = [];
 
-  // ПОКА ЧТО ДЛЯ МОКОВЫХ ПРОДУКТОВ
-  let brand = await brandsService.getBrandById(brandId);
-  localProductsList = await productService.getProductsByBrand(brand.name);
+  const requestData = new FormData();
+
+  requestData.append('Id', brandId);
+  let brand = await brandsService.getBrandById(requestData);
+
+  requestData.set("BrandId", brand.Id);
+
+  localProductsList = await productService.getProductsByBrand(requestData);
 
   setProducts(localProductsList);
   setBrand(brand);
