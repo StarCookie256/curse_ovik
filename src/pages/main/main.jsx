@@ -4,17 +4,20 @@ import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
 import FilterBar from '../../components/filterBar/filterBar';
 
+async function fetchData(setProducts){
+  const productData = await productService.getProductsOfDay();
+  console.log(productData);
+  setProducts(productData);
+}
+
 function MainPage(){
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
-    productService.getProductsOfDay()
-      .then(productsData => {
-        setProducts(productsData);
-      });
-      setLoading(false);
+    fetchData(setProducts);
+    setLoading(false);
   }, []);
 
   if(loading){

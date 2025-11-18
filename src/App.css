@@ -6,6 +6,11 @@
   position: relative;
 }
 
+.loading-container{
+  font-size: 2rem;
+  color: #007170;
+}
+
 .main-content {
   flex: 1 0 auto;
   display: flex;

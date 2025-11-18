@@ -7,16 +7,9 @@ import ProductCard from '../../components/productCard/productCard';
 import { Link } from 'react-router-dom';
 
 async function fetchData(brandId, setProducts, setBrand){
-  let localProductsList = [];
 
-  const requestData = new FormData();
-
-  requestData.append('Id', brandId);
-  let brand = await brandsService.getBrandById(requestData);
-
-  requestData.set("BrandId", brand.Id);
-
-  localProductsList = await productService.getProductsByBrand(requestData);
+  const brand = await brandsService.getBrandById(brandId);
+  const localProductsList = await productService.getProductsByBrand(brandId);
 
   setProducts(localProductsList);
   setBrand(brand);
@@ -24,7 +17,7 @@ async function fetchData(brandId, setProducts, setBrand){
 
 function BrandPage(){
   const { brandId } = useParams();
-  const [brand, setBrand] = useState();
+  const [brand, setBrand] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +34,7 @@ function BrandPage(){
     }
   }, [brandId]);
 
-  if(loading){
+  if(loading || !brand){
     return(
       <div className='loading-container'>
         Загрузка...
@@ -59,7 +52,7 @@ function BrandPage(){
         >
           Каталог
         </Link>
-        <span> / {brand.name}</span>
+        <span> / {brand && brand.name}</span>
       </div>
 
       <div className='brand-page-info-container'>
@@ -78,7 +71,7 @@ function BrandPage(){
             id = {product.id}
             name = {product.name}
             desc = {product.desc}
-            category = {product.category}
+            categories = {product.categories}
             brand = {product.brand}
             image = {product.image}
             fPrice = {product.fPrice}

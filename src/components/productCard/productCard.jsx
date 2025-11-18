@@ -16,7 +16,7 @@ function ProductCard({
   name,
   desc,
   brand,
-  category,
+  categories,
   fPrice,
   sPrice,
   gender

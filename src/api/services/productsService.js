@@ -1,16 +1,17 @@
 import { CURRENT_MODE, API_MODE, API_BASE_URL } from '../config';
 
 const realProductsService = {
-  getProductsSearch: async (filters, pagination) => {
+  getProductsSearch: async (filters,pagination) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/product/search`, {
+
+      const response = await fetch(`${API_BASE_URL}/Product/search`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          filters: filters,
-          pagination: pagination
+          ProductFilters: filters,
+          Pagination: pagination
         })
       });
 
@@ -19,7 +20,7 @@ const realProductsService = {
       }
 
       const data = await response.json();
-
+      console.log('asdsadsadsadsadasdas',data);
       return data;
     } catch (error) {
       console.error('Products search error:', error);
@@ -29,12 +30,12 @@ const realProductsService = {
 
   getProductsByBrand: async (requestData) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/product/bybrand`, {
+      const response = await fetch(`${API_BASE_URL}/Product/bybrand`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestData)
+        body: requestData
       });
 
       if (!response.ok) {

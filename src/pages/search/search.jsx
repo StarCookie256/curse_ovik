@@ -6,24 +6,30 @@ import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
 import SearchPaginator from '../../components/searchPaginator/searchPaginator';
 
-async function fetchProducts(searchArgs, page, setProducts, setPageMax) {
+async function fetchProducts(searchArgs, page, setProducts, setPageMax, setTotalCount) {
   if(searchArgs == null || page == null) return;
 
-  let localProductList = [];
 
-  const requestData = new FormData();
-
-  let pageObj = {
+  const ProductFilters = {
+    'Brands': searchArgs.brands,
+    'Categories': searchArgs.categories,
+    'Gender': searchArgs.gender,
+    'PriceValues': searchArgs.priceValues,
+    'VolumeValues': searchArgs.volumeValues
+  };
+  const Pagination = {
     'Page': page,
     'PageSize': PRODUCTS_PER_PAGE
-  }
-
-  console.log(localProductList.length);
-  setProducts(localProductList);
+  };
+  
+  const response = await productService.getProductsSearch(ProductFilters,Pagination);
+  console.log(response);
+  setTotalCount(response.TotalCount);
+  setPageMax(response.TotalPages);
+  setProducts(response.Items);
 }
 
 const PRODUCTS_PER_PAGE = 18;
-const getTotalPageCount = (productsCount) => Math.ceil(productsCount / PRODUCTS_PER_PAGE);
 
 function SearchPage(){
   const location = useLocation();
@@ -31,52 +37,73 @@ function SearchPage(){
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [pageMax, setPageMax] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const updateProducts = (newSearchArgs) => {
-    fetchProducts(newSearchArgs, page, setProducts, setPageMax);
+    fetchProducts(newSearchArgs, page, setProducts, setPageMax, setTotalCount);
   };
 
   useEffect(() => { 
-    fetchProducts(searchArgs, page, setProducts, setPageMax);
-  }, [searchArgs]);
+    const loadProducts = async () => {
+      setLoading(true);
+      try {
+        await fetchProducts(searchArgs, page, setProducts, setPageMax, setTotalCount);
+      } catch (error) {
+        console.error('Error loading products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (searchArgs && page) {
+      loadProducts();
+    }
+  }, [searchArgs, page]);
 
   // переход на след страницу
   const handleNextPageClick = useCallback(() => {
     const current = page;
     const next = current + 1;
-    const total = products ? getTotalPageCount(products.length) : current;
-
-    setPage(next <= total ? next : current);
-  }, [page, products]);
+    
+    setPage(next <= pageMax ? next : current);
+  }, [page, pageMax]);
 
   // переход на прошлую страницу
   const handlePrevPageClick = useCallback(() => {
     const current = page;
     const prev = current - 1;
-
+    
     setPage(prev > 0 ? prev : current);
   }, [page]);
 
+  if(loading){
+    return(
+      <div className='loading-container'>
+        Загрузка...
+      </div>
+    );
+  }
+
   return(
     <div className='main-page-container'>
-      <div className='main-page-title'>Найдено товаров: {products.length}</div>
+      <div className='main-page-title'>Найдено товаров: {totalCount ?? 0}</div>
 
       <div className='main-page-components-container'>
-        {products.length > 0 
+        {products && products.length > 0 
         ? (
           <div className='main-page-products'>
             {products.map((product) => (
               <ProductCard
-                key = {product.id}
-                id = {product.id}
-                name = {product.name}
-                desc = {product.desc}
-                category = {product.category}
-                brand = {product.brand}
-                image = {product.image}
-                fPrice = {product.fPrice}
-                sPrice = {product.sPrice}
-                gender = {product.gender}
+                key = {product.Id}
+                id = {product.Id}
+                name = {product.Name}
+                categories = {product.Categories}
+                brand = {product.Brand}
+                image = {product.Image}
+                fPrice = {product.FPrice}
+                sPrice = {product.SPrice}
+                gender = {product.Gender}
               />
             ))}
           </div>
