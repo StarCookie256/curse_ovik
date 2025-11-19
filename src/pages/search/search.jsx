@@ -1,6 +1,6 @@
 import './search.css';
 import FilterBar from '../../components/filterBar/filterBar';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
@@ -8,7 +8,6 @@ import SearchPaginator from '../../components/searchPaginator/searchPaginator';
 
 async function fetchProducts(searchArgs, page, setProducts, setPageMax, setTotalCount) {
   if(searchArgs == null || page == null) return;
-
 
   const ProductFilters = {
     'Brands': searchArgs.brands,
@@ -23,10 +22,10 @@ async function fetchProducts(searchArgs, page, setProducts, setPageMax, setTotal
   };
   
   const response = await productService.getProductsSearch(ProductFilters,Pagination);
-  console.log(response);
-  setTotalCount(response.TotalCount);
-  setPageMax(response.TotalPages);
-  setProducts(response.Items);
+  
+  setTotalCount(response.totalCount);
+  setPageMax(response.totalPages);
+  setProducts(response.items);
 }
 
 const PRODUCTS_PER_PAGE = 18;
@@ -34,14 +33,23 @@ const PRODUCTS_PER_PAGE = 18;
 function SearchPage(){
   const location = useLocation();
   const searchArgs = location.state;
+  const buttonRef = useRef(null);
+  const [isSearching, setIsSearching] = useState(false);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [pageMax, setPageMax] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const updateProducts = (newSearchArgs) => {
-    fetchProducts(newSearchArgs, page, setProducts, setPageMax, setTotalCount);
+  const updateProducts = async (newSearchArgs) => {
+    setIsSearching(true);
+    try {
+      await fetchProducts(newSearchArgs, page, setProducts, setPageMax, setTotalCount);
+    } catch (error) {
+      console.error('Search error:', error);
+    } finally {
+      setIsSearching(false);
+  }
   };
 
   useEffect(() => { 
@@ -58,6 +66,10 @@ function SearchPage(){
 
     if (searchArgs && page) {
       loadProducts();
+    } else {
+      setLoading(false);
+      setProducts([]);
+      setTotalCount(0);
     }
   }, [searchArgs, page]);
 
@@ -77,6 +89,12 @@ function SearchPage(){
     setPage(prev > 0 ? prev : current);
   }, [page]);
 
+  useEffect(() => {
+    if (buttonRef.current) {
+      buttonRef.current.disabled = isSearching;
+    }
+  }, [isSearching]);
+
   if(loading){
     return(
       <div className='loading-container'>
@@ -90,20 +108,21 @@ function SearchPage(){
       <div className='main-page-title'>Найдено товаров: {totalCount ?? 0}</div>
 
       <div className='main-page-components-container'>
-        {products && products.length > 0 
+        {products.length > 0 
         ? (
           <div className='main-page-products'>
             {products.map((product) => (
               <ProductCard
-                key = {product.Id}
-                id = {product.Id}
-                name = {product.Name}
-                categories = {product.Categories}
-                brand = {product.Brand}
-                image = {product.Image}
-                fPrice = {product.FPrice}
-                sPrice = {product.SPrice}
-                gender = {product.Gender}
+                key = {product.id}
+                id = {product.id}
+                name = {product.name}
+                desc = {product.desc}
+                category = {product.category}
+                brand = {product.brand}
+                image = {product.image}
+                fPrice = {product.fPrice}
+                sPrice = {product.sPrice}
+                gender = {product.gender}
               />
             ))}
           </div>
@@ -111,7 +130,7 @@ function SearchPage(){
         : (<div className='search-page-nothing'>Попробуйте изменить фильтры поиска, чтобы найти больше товаров!</div>)
         }
         <div className='main-page-filter-bar'>
-          <FilterBar onSearch={updateProducts} />
+          <FilterBar onSearch={updateProducts} ref={buttonRef} isSearching={isSearching} />
         </div>
       </div>
       <div className='search-page-paginator-container'>

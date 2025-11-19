@@ -1,14 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './productCard.css';
-import { brandsService } from '../../api/services/brandsService';
 import { useEffect, useState } from 'react';
-
-async function fetchData(brand, setBrandId){
-
-  let localBrand = await brandsService.getBrandByName(brand);
-
-  setBrandId(localBrand.id);
-};
 
 function ProductCard({
   id,
@@ -22,7 +14,6 @@ function ProductCard({
   gender
 }){
   const navigate = useNavigate();
-  const [brandId, setBrandId] = useState();
   const [imgSrc, setImgSrc] = useState("/no_photo.png");
 
   useEffect(() => {
@@ -36,12 +27,8 @@ function ProductCard({
     checkImage.src = image;
   }, [image]);
 
-  useEffect(() => {
-    fetchData(brand, setBrandId);
-  }, [brand]);
-
   const productPageNav = () => {
-    navigate(`/catalog/${brandId}/${id}`);
+    navigate(`/catalog/${brand.id}/${id}`);
   }
 
   return(
@@ -54,7 +41,7 @@ function ProductCard({
         />  
       </div>
       <div className='product-card-info-container'>
-        <p className='product-card-brand'>{brand}</p>
+        <p className='product-card-brand'>{brand.name}</p>
         <h3 className='product-card-name'>{name}</h3>
         {gender === "male" ?
           (<div className={`product-card-gender ${gender}`}><span>М</span></div>

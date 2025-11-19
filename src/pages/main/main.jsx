@@ -6,7 +6,7 @@ import FilterBar from '../../components/filterBar/filterBar';
 
 async function fetchData(setProducts){
   const productData = await productService.getProductsOfDay();
-  console.log(productData);
+
   setProducts(productData);
 }
 

@@ -73,3 +73,10 @@
 .brand-page-products .product-card-price {
   text-shadow: 1px 5px 7px rgb(111, 195, 196, 0.8);
 }
+
+.brand-products-nothing{
+  width: 100%;
+  margin: 1.5rem;
+  font-size: 2rem;
+  color:rgb(0, 113, 112, 0.6);
+}

@@ -33,8 +33,9 @@
 
 .product-page-image-container{
   margin: auto;
-  max-width: 50%;
-  min-width: 20rem;
+  max-width: 25rem;
+  max-height: 30rem;
+  min-width: 25rem;
   min-height: 30rem;
   background: none;
   display: flex;

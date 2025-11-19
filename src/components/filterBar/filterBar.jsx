@@ -3,7 +3,7 @@ import PerfumeryCheckbox from '../perfumeryCheckbox/perfumeryCheckbox';
 import PerfumerySlider from '../perfumerySlider/perfumerySlider';
 import PerfumeryScrollSearcher from '../perfumeryScrollSearcher/perfumeryScrollSearcher';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { brandsService } from '../../api/services/brandsService';
 import { categoriesService } from '../../api/services/categoriesService';
 
@@ -18,9 +18,7 @@ async function fetchData(setBrands, setCategories){
   setCategories(localCategoriesList);
 };
 
-function FilterBar({
-  onSearch
-}){
+const FilterBar = forwardRef(({ isSearching, onSearch }, ref) => {
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
@@ -172,10 +170,10 @@ function FilterBar({
       </div>
 
       <div className='filter-search-button-container'>
-        <button onClick={searchButtonClick} className='filter-search-button'>Найти</button>
+        <button ref={ref} onClick={searchButtonClick} disabled={isSearching} className='filter-search-button'>{isSearching ? "Идет поиск..." : "Найти"}</button>
       </div>
     </div>
   );
-}
+});
 
 export default FilterBar;

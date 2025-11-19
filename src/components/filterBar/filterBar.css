@@ -71,3 +71,10 @@
 .filter-search-button:hover {
   box-shadow: 0 0 15px rgb(127, 51, 89, 0.9);
 }
+
+.filter-search-button:disabled{
+  cursor: default;
+}
+.filter-search-button:disabled:hover{
+  box-shadow: 0 0 10px rgb(127, 51, 89, 0.6);
+}

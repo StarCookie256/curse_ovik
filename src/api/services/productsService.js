@@ -1,6 +1,30 @@
 import { CURRENT_MODE, API_MODE, API_BASE_URL } from '../config';
 
 const realProductsService = {
+  getProductPageInfo: async (productId) => {
+    try {
+
+      const response = await fetch(`${API_BASE_URL}/Product/pageinfo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: productId
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при запросе на поиск');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Products search error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
+  },
+
   getProductsSearch: async (filters,pagination) => {
     try {
 
@@ -20,7 +44,7 @@ const realProductsService = {
       }
 
       const data = await response.json();
-      console.log('asdsadsadsadsadasdas',data);
+
       return data;
     } catch (error) {
       console.error('Products search error:', error);

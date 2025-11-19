@@ -64,23 +64,29 @@ function BrandPage(){
         </div>
       </div>
 
-      <div className='brand-page-products'>
-        {products.map((product) => (
-          <ProductCard
-            key = {product.id}
-            id = {product.id}
-            name = {product.name}
-            desc = {product.desc}
-            categories = {product.categories}
-            brand = {product.brand}
-            image = {product.image}
-            fPrice = {product.fPrice}
-            sPrice = {product.sPrice}
-            gender = {product.gender}
-          />
-        ))}
-      </div>
-      
+      {products.length > 0 ? 
+        (
+          <div className='brand-page-products'>
+            {products.map((product) => (
+            <ProductCard
+              key = {product.id}
+              id = {product.id}
+              name = {product.name}
+              desc = {product.desc}
+              categories = {product.categories}
+              brand = {product.brand}
+              image = {product.image}
+              fPrice = {product.fPrice}
+              sPrice = {product.sPrice}
+              gender = {product.gender}
+            />))}
+          </div>
+      ) : (
+        <div className='brand-products-nothing'>
+          У данного бренда отсутствуют товары!
+        </div>
+      )}
+
     </div>
   );
 }

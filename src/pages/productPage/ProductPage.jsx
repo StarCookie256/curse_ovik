@@ -1,34 +1,43 @@
 import './ProductPage.css';
 import { productService } from '../../api/services/productsService';
-import { productVariationsService } from '../../api/services/productVariationsService';
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PerfumeryScrollSearcher from '../../components/perfumeryScrollSearcher/perfumeryScrollSearcher';
 import ProductVariationLine from '../../components/productVariationLine/ProductVariationLine';
 
-async function fetchData(productId, setProduct, setProductVariations){
-  let localProduct = await productService.getProductById(productId);
-  let localProductVariationsList = [];
-
-  localProductVariationsList = await productVariationsService.getProductVariationsByProductId(productId);
-
+async function fetchData(productId, setProduct){
+  const localProduct = await productService.getProductPageInfo(productId);
+  console.log(localProduct);
   setProduct(localProduct);
-  setProductVariations(localProductVariationsList);
 }
 
 function ProductPage(){
-  const { brandId, productId} = useParams();
-  const [product, setProduct] = useState();
-  const [productVariations, setProductVariations] = useState([]);
+  const { brandId, productId } = useParams();
+  const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [imgSrc, setImgSrc] = useState("/no_photo.png");
   
   useEffect(() => {
-    try{
-      setLoading(true);
-      console.log(productId);
-      fetchData(productId, setProduct, setProductVariations)
+    const loadProduct = async () => {
+      try{
+        setLoading(true);
+        await fetchData(productId, setProduct)
+      }
+      catch(error){
+        console.error('Error loading user data:', error);
+      }
+      finally{
+        setLoading(false);
+      }
+    }
 
+    if(productId){
+      loadProduct();
+    }
+  }, [productId]);
+
+   useEffect(() => {
+    if (product?.image) {
       const checkImage = new Image();
       checkImage.onload = () => {
         setImgSrc(product.image); // Картинка существует
@@ -37,27 +46,12 @@ function ProductPage(){
         setImgSrc("/no_photo.png"); // Картинка не существует
       };
       checkImage.src = product.image;
+    } else {
+      setImgSrc("/no_photo.png");
     }
-    catch(error){
-      console.error('Error loading user data:', error);
-    }
-    finally{
-      setLoading(false);
-    }
-  }, [productId]);
+  }, [product]); // Зависимость от product
 
-  // useEffect(() => {
-  //   const checkImage = new Image();
-  //   checkImage.onload = () => {
-  //     setImgSrc(product.image); // Картинка существует
-  //   };
-  //   checkImage.onerror = () => {
-  //     setImgSrc("/no_photo.png"); // Картинка не существует
-  //   };
-  //   checkImage.src = product.image;
-  // }, [product.image]);
-
-  if(loading){
+  if(loading || !product){
     return(
       <div className='loading-container'>
         Загрузка...
@@ -80,7 +74,7 @@ function ProductPage(){
           className='product-page-back' 
           to={`/catalog/${brandId}`}
         >
-          {product.brand}
+          {product.brand.name}
         </Link>
         <span> / {product.name}</span>
       </div>
@@ -99,7 +93,7 @@ function ProductPage(){
           <p className='product-page-title'>{product.name}</p>
           <div className='product-page-details'>
             {product.country && <p className='product-page-text country'>Страна производителя: <span>{product.country}</span> </p>}
-            {product.brand && <p className='product-page-text brand'>Бренд: <span>{product.brand}</span> </p>}
+            {product.brand && product.brand.name && (<p className='product-page-text brand'>Бренд: <span>{product.brand.name}</span> </p>)}
             {product.manufactureYear && <p className='product-page-text date'>Год выпуска: <span>{product.manufactureYear}</span> </p>}
             {product.expirationDate && <p className='product-page-text expiration-date'>Срок годности: <span>{product.expirationDate}</span> </p>}
             {product.gender && <p className='product-page-text gender'>Пол: <span>{product.gender === 'male' ? 'для мужчин' : 'для женщин'}</span> </p>}
@@ -111,10 +105,10 @@ function ProductPage(){
         <div className='product-page-section-title'>Варианты товара</div>
         <PerfumeryScrollSearcher 
           elements={
-            productVariations.map((productVariation) => (
+            product.productVariations.map((productVariation) => (
               <ProductVariationLine
                 id={productVariation.id}
-                productId={productVariation.productId}
+                productId={product.id}
                 category={productVariation.category}
                 price={productVariation.price}
                 volume={productVariation.volume}
@@ -128,7 +122,7 @@ function ProductPage(){
       <div className='product-page-description-container'>
         <div className='product-page-section-title'>Описание</div>
         <div className='product-page-description'>
-          Погрузитесь в мир изысканной парфюмерии с ароматом {product.brand} {product.name}. Это уникальное творение — больше, чем просто духи, это ключ к вашему внутреннему состоянию и яркий акцент в вашем образе. {product.brand} {product.name} — это гармоничный симбиоз тщательно отобранных нот, которые раскрываются на коже, создавая неповторимый шлейф. Композиция начинается с яркого и соблазнительного шлейфа, который плавно переходит в сердцевину, раскрывающую всю глубину и характер аромата. Финальная же базовая нота оставляет за собой незабываемый, стойкий след в памяти окружающих. Идеально сбалансированная формула подчеркивает индивидуальность, позволяя аромату звучать по-разному в зависимости от своей обладательницы или обладателя. {product.brand} {product.name} создан для тех, кто ценит качество, стремится к самовыражению и не боится быть замеченным. Позвольте себе роскошь быть особенным каждый день с {product.brand} {product.name}.
+          Погрузитесь в мир изысканной парфюмерии с ароматом {product.brand.name} {product.name}. Это уникальное творение — больше, чем просто духи, это ключ к вашему внутреннему состоянию и яркий акцент в вашем образе. {product.brand.name} {product.name} — это гармоничный симбиоз тщательно отобранных нот, которые раскрываются на коже, создавая неповторимый шлейф. Композиция начинается с яркого и соблазнительного шлейфа, который плавно переходит в сердцевину, раскрывающую всю глубину и характер аромата. Финальная же базовая нота оставляет за собой незабываемый, стойкий след в памяти окружающих. Идеально сбалансированная формула подчеркивает индивидуальность, позволяя аромату звучать по-разному в зависимости от своей обладательницы или обладателя. {product.brand.name} {product.name} создан для тех, кто ценит качество, стремится к самовыражению и не боится быть замеченным. Позвольте себе роскошь быть особенным каждый день с {product.brand.name} {product.name}.
         </div>
       </div>
 
