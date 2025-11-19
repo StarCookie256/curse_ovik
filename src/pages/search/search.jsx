@@ -44,6 +44,7 @@ function SearchPage(){
   const updateProducts = async (newSearchArgs) => {
     setIsSearching(true);
     try {
+      setPage(1);
       await fetchProducts(newSearchArgs, page, setProducts, setPageMax, setTotalCount);
     } catch (error) {
       console.error('Search error:', error);
