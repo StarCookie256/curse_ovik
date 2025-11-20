@@ -1,7 +1,82 @@
-  // ДЛЯ REAL BASKET SERVICE ПРИГОДИТСЯ
-  // getBasketByUserId: async (userId) => {
-  //   return mockBasketProducts;
-  // },
+import { CURRENT_MODE, API_MODE, API_BASE_URL } from '../config';
+  
+const realBasketService = {
+  getBasketByUserId: async (customerId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/Basket/bycustomer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: customerId
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при запросе на корзину пользователя!');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Basket fetch error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
+  },
+
+  addBasketProduct: async (basketRequest, customerId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/Basket/add`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          BasketRequest: basketRequest,
+          CustomerId: customerId
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при запросе на добавление предмета в корзину пользователя!');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Basket fetch error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
+  },
+
+  deleteBasketProduct: async (basketRequest, customerId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/Basket/delete`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          BasketRequest: basketRequest,
+          CustomerId: customerId
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при запросе на удаление предмета из корзины пользователя!');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Basket fetch error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
+  }
+}
 
 const mockBasketProducts = {
   products: [
@@ -52,4 +127,6 @@ const mockBasketService = {
   }
 };
 
-export const basketService = mockBasketService;
+export const basketService = CURRENT_MODE === API_MODE.MOCK 
+  ? mockBasketService 
+  : realBasketService;
