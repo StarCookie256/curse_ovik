@@ -3,7 +3,7 @@ import { useAuth } from '../../components/context/AuthContext';
 import { useState, useEffect } from 'react';
 
 function CabinetPage(){
-  const {user, logout, refreshProfile} = useAuth();
+  const {user, refreshProfile} = useAuth();
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
@@ -19,11 +19,7 @@ function CabinetPage(){
     };
 
     loadUserData();
-  }, [refreshProfile]); 
-  
-  const exit = () => {
-    logout();
-  }
+  }, [refreshProfile]);
 
   if(loading){
     return(
@@ -55,7 +51,6 @@ function CabinetPage(){
           <div className='cabinet-page-other-info-container'>
             <p className='cabinet-page-text'>Телефон: {user.phone}</p>
             <p className='cabinet-page-text'>Адрес: {user.address}</p>
-            <button className='cabinet-page-button exit' onClick={exit}>Выйти из аккаунта</button>
           </div>
 
         </div>

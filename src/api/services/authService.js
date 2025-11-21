@@ -3,7 +3,7 @@ import { CURRENT_MODE, API_MODE, AUTH_TOKEN_KEY, USER_DATA_KEY, API_BASE_URL } f
 const realAuthService = {
   login: async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      const response = await fetch(`${API_BASE_URL}/Auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,21 +21,21 @@ const realAuthService = {
       localStorage.setItem(AUTH_TOKEN_KEY, data.accessToken);
       
       // Получаем данные пользователя
-      // const userResponse = await fetch(`${API_BASE_URL}/auth/profile`, {
-      //   headers: {
-      //     'Authorization': `Bearer ${data.accessToken}`
-      //   },
-      //   credentials: 'include',
-      // });
+      const userResponse = await fetch(`${API_BASE_URL}/Customer/cabinet`, {
+        headers: {
+          'Authorization': `Bearer ${data.accessToken}`
+        },
+        credentials: 'include',
+      });
 
-      // if (userResponse.ok) {
-      //   const userData = await userResponse.json();
-      //   localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
-      //   return {
-      //     token: data.accessToken,
-      //     user: userData
-      //   };
-      // }
+      if (userResponse.ok) {
+        const userData = await userResponse.json();
+        localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
+        return {
+          token: data.accessToken,
+          user: userData
+        };
+      }
 
       return {
         token: data.accessToken,
@@ -49,7 +49,7 @@ const realAuthService = {
 
   register: async (formDataToSend) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+      const response = await fetch(`${API_BASE_URL}/Auth/register`, {
         method: 'POST',
         body: formDataToSend,
         credentials: 'include',
@@ -65,21 +65,21 @@ const realAuthService = {
       localStorage.setItem(AUTH_TOKEN_KEY, data.accessToken);
       
       // Получаем данные пользователя
-      // const userResponse = await fetch(`${API_BASE_URL}/auth/profile`, {
-      //   headers: {
-      //     'Authorization': `Bearer ${data.accessToken}`
-      //   },
-      //   credentials: 'include',
-      // });
+      const userResponse = await fetch(`${API_BASE_URL}/Customer/cabinet`, {
+        headers: {
+          'Authorization': `Bearer ${data.accessToken}`
+        },
+        credentials: 'include',
+      });
 
-      // if (userResponse.ok) {
-      //   const userData = await userResponse.json();
-      //   localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
-      //   return {
-      //     token: data.accessToken,
-      //     user: userData
-      //   };
-      // }
+      if (userResponse.ok) {
+        const userData = await userResponse.json();
+        localStorage.setItem(USER_DATA_KEY, JSON.stringify(userData));
+        return {
+          token: data.accessToken,
+          user: userData
+        };
+      }
 
       return {
         token: data.accessToken,
@@ -89,22 +89,6 @@ const realAuthService = {
       console.error('Register error:', error);
       throw new Error('Ошибка соединения с сервером');
     }
-  },
-
-  logout: async () => {
-    try {
-      // Удаляем токен из бэкенда (если есть endpoint для logout)
-      await fetch(`${API_BASE_URL}/auth/signout`, { 
-        method: 'POST',
-        credentials: 'include' // Важно для работы с cookies
-      });
-    } catch (error) {
-      console.log('Logout API error:', error);
-    }
-    
-    // Очищаем localStorage
-    localStorage.removeItem(AUTH_TOKEN_KEY);
-    localStorage.removeItem(USER_DATA_KEY);
   },
 
   checkAuth: async () => {

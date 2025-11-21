@@ -67,19 +67,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = async () => {
-    try {
-      setLoading(true);
-      await authService.logout();
-      setUser(null);
-      setError(null);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const refreshProfile = useCallback(async () => {
     try {
       const profile = await authService.getProfile();
@@ -96,7 +83,6 @@ export const AuthProvider = ({ children }) => {
     error,
     login,
     register,
-    logout,
     refreshProfile,
     isAuthenticated: !!user
   };
