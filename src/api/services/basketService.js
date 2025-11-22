@@ -1,15 +1,49 @@
-import { CURRENT_MODE, API_MODE, API_BASE_URL } from '../config';
+import { CURRENT_MODE, API_MODE, API_BASE_URL, AUTH_TOKEN_KEY } from '../config';
   
 const realBasketService = {
-  getBasketByUserId: async (customerId) => {
+  getBasketItemsCount: async () => {
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+        
+    if (!token) {
+      return null;
+    }
+    
     try {
-      const response = await fetch(`${API_BASE_URL}/Basket/bycustomer`, {
-        method: 'POST',
+      const response = await fetch(`${API_BASE_URL}/Basket/count`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
-        },
-        body: customerId
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при запросе на количество товаров в корзине пользователя!');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Basket fetch error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
+  },
+
+  getBasketByUserId: async () => {
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+        
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/Basket/bycustomer`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
       });
 
       if (!response.ok) {
@@ -26,15 +60,21 @@ const realBasketService = {
   },
 
   addBasketProduct: async (basketRequest, customerId) => {
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+        
+    if (!token) {
+      return null;
+    }
+
     try {
       const response = await fetch(`${API_BASE_URL}/Basket/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          BasketRequest: basketRequest,
-          CustomerId: customerId
+          BasketRequest: basketRequest
         })
       });
 
@@ -51,16 +91,22 @@ const realBasketService = {
     }
   },
 
-  deleteBasketProduct: async (basketRequest, customerId) => {
+  deleteBasketProduct: async (basketRequest) => {
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+        
+    if (!token) {
+      return null;
+    }
+
     try {
       const response = await fetch(`${API_BASE_URL}/Basket/delete`, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          BasketRequest: basketRequest,
-          CustomerId: customerId
+          BasketRequest: basketRequest
         })
       });
 
@@ -116,7 +162,7 @@ const mockBasketService = {
     return mockBasketProducts;
   },
 
-  getBasketProductsCount: async () => {
+  getBasketItemsCount: async () => {
     const productsCount = mockBasketProducts.products.length;
 
     return productsCount;

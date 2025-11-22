@@ -1,7 +1,7 @@
 import { CURRENT_MODE, API_MODE, AUTH_TOKEN_KEY, USER_DATA_KEY, API_BASE_URL } from '../config';
 
 const realAuthService = {
-  login: async () => {
+  login: async (email, password) => {
     try {
       const response = await fetch(`${API_BASE_URL}/Auth/login`, {
         method: 'POST',
@@ -9,6 +9,10 @@ const realAuthService = {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
+        body: JSON.stringify({
+          Email: email,
+          Password: password
+        })
       });
 
       if (!response.ok) {
@@ -43,7 +47,7 @@ const realAuthService = {
       };
     } catch (error) {
       console.error('Login error:', error);
-      throw new Error('Ошибка соединения с сервером');
+      throw new Error('Произошла ошибка');
     }
   },
 
@@ -100,7 +104,7 @@ const realAuthService = {
 
     try {
       // Проверяем токен и получаем данные пользователя
-      const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+      const response = await fetch(`${API_BASE_URL}/Customer/cabinet`, {
         headers: {
           'Authorization': `Bearer ${token}`
         },
@@ -131,7 +135,7 @@ const realAuthService = {
       throw new Error('Not authenticated');
     }
 
-    const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+    const response = await fetch(`${API_BASE_URL}/Customer/cabinet`, {
       headers: {
         'Authorization': `Bearer ${token}`
       },

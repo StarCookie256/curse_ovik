@@ -7,7 +7,9 @@ import { useAuth } from '../../components/context/AuthContext';
 import { Link } from 'react-router-dom';
 
 async function fetchData(setTotalPrice, setProducts){
-  let localBasket = await basketService.getBasket();
+  const localBasket = await basketService.getBasketByUserId();
+
+  console.log(localBasket);
 
   setTotalPrice(localBasket.totalPrice);
   setProducts(localBasket.products);
@@ -20,14 +22,17 @@ function BasketPage(){
   const [loading, setLoading] = useState();
 
   useEffect(() => {
-    try {
-      setLoading(true);
-      fetchData(setTotalPrice, setProducts);
-    } catch (error) {
-      console.error('Error loading basket data:', error);
-    } finally {
-      setLoading(false);
-    }
+    const localFetch = async () => {
+      try {
+        setLoading(true);
+        await fetchData(setTotalPrice, setProducts);
+      } catch (error) {
+        console.error('Error loading basket data:', error);
+      } finally {
+        setLoading(false);
+    }}
+
+    localFetch();
   }, []);
 
   if(loading){

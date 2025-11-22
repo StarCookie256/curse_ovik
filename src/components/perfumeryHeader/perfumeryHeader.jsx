@@ -23,8 +23,8 @@ function PerfumeryHeader(){
     async function fetchData() {
       try {
         setLoading(true);
-        // const count = await basketService.getBasketProductsCount();
-        // setBasketCount(count);
+        const count = await basketService.getBasketItemsCount();
+        setBasketCount(count);
       } catch(error) {
         console.error('Error loading basket count:', error);
       } finally {

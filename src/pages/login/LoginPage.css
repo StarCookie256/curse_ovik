@@ -72,3 +72,34 @@
   font-family: 'NormalTextFont';
   font-size: 1.5rem;
 }
+
+.login-page-submit-button:disabled{
+  cursor: default;
+}
+
+.login-page-register-container{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
+  padding: 0 15px;
+  position: relative;
+}
+
+.login-page-register{
+  margin-top: auto;
+  width: 12rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  background: linear-gradient(to right, #49296a, rgb(174, 136, 221));
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgb(127, 51, 89, 0.6);
+  font-family: 'NormalTextFont';
+  font-size: 1.5rem;
+}

@@ -1,6 +1,6 @@
 import './LoginPage.css';
 import { useAuth } from '../../components/context/AuthContext';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useState } from 'react';
 
 
@@ -65,15 +65,16 @@ function LoginPage(){
         <button type="submit" disabled={isSubmitting} className="login-page-submit-button">
           {isSubmitting ? 'Вход...' : 'Войти'}
         </button>
-      </form>
 
-      {process.env.NODE_ENV === 'development' && (
-        <div className="test-data">
-          <h3>Тестовые данные:</h3>
-          <p>Логин: <strong>123</strong>, Пароль: <strong>123</strong></p>
-          <p>Логин: <strong>user</strong>, Пароль: <strong>user</strong></p>
-        </div>
-      )}
+        <Link 
+          className='login-page-register-container' 
+          to={`/register`}
+        >
+          <button className="login-page-register">
+            Регистрация
+          </button>
+        </Link>
+      </form>
     </div>
   );
 };

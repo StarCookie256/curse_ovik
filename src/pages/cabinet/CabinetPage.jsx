@@ -1,6 +1,7 @@
 import './CabinetPage.css';
 import { useAuth } from '../../components/context/AuthContext';
 import { useState, useEffect } from 'react';
+import { API_IMAGE_PATH } from '../../api/config';
 
 function CabinetPage(){
   const {user, refreshProfile} = useAuth();
@@ -28,7 +29,7 @@ function CabinetPage(){
       </div>
     );
   }
-  
+  console.log(user);
   return(
     <div className='cabinet-page-container'>
       <div className='cabinet-page-elements-container'>
@@ -39,7 +40,7 @@ function CabinetPage(){
             <div className='cabinet-page-image-container'>
               <img
                 className='cabinet-page-image'
-                src={user.image}
+                src={`${API_IMAGE_PATH}${user.image}`}
                 alt="IMG"
               />
             </div>
