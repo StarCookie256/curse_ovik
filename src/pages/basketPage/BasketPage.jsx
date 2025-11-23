@@ -12,7 +12,7 @@ async function fetchData(setTotalPrice, setProducts){
   console.log(localBasket);
 
   setTotalPrice(localBasket.totalPrice);
-  setProducts(localBasket.products);
+  setProducts(localBasket.basketItems);
 };
 
 function BasketPage(){
@@ -57,7 +57,9 @@ function BasketPage(){
       </div>
 
       <div className='basket-card'>
-        <PerfumeryScrollSearcher 
+        {products 
+        ? (
+          <PerfumeryScrollSearcher 
           elements={
             products.map((product) => (
               <BasketProduct
@@ -72,6 +74,13 @@ function BasketPage(){
             ))
           }
         />
+        )
+        : (
+          <div className='basket-nothing'>
+            Корзина пуста
+          </div>
+        )
+        }
       </div>
 
       <div className='basket-page-buy-container'>

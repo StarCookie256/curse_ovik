@@ -59,7 +59,7 @@ const realBasketService = {
     }
   },
 
-  addBasketProduct: async (basketRequest, customerId) => {
+  addBasketProduct: async (productVariationId) => {
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
         
     if (!token) {
@@ -74,7 +74,7 @@ const realBasketService = {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          BasketRequest: basketRequest
+          ProductVariationId: productVariationId // Правильная структура
         })
       });
 

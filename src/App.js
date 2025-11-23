@@ -44,6 +44,14 @@ function App() {
             <Route path="/catalog" element={<CatalogPage />} />
             <Route path="/catalog/:brandId" element={<BrandPage />} />
             <Route path="/catalog/:brandId/:productId" element={<ProductPage />} />
+            <Route
+              path="/register"
+              element={
+                <ProtectedRoute requireAuth={false}>
+                  <ProductPage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/search" element={<SearchPage />} />
             <Route
               path="/cabinet"
