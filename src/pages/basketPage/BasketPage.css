@@ -98,11 +98,25 @@
   font-size: 1.4rem;
   color: #ffaec8;
   font-family: 'NormalTextFont';
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .basket-page-buy-button:hover{
   color: rgb(127, 51, 89);
   background: #ffaec8;
   border: 5px solid rgb(127, 51, 89);
+}
+
+.basket-page-buy-button:disabled:hover{
+  background: rgb(85, 16, 103, 0.9);
+  color: #ffaec8;
+  border: 5px solid #8c56b6;
+}
+
+.basket-nothing{
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: rgb(127, 51, 89);
 }

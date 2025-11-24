@@ -76,12 +76,12 @@
   height: auto;
 }
 
-.cabinet-page-map{
+/* .cabinet-page-map{
   background: gainsboro;
   border-radius: 8px 8px 0 0;
   flex: 1; 
   min-height: 15rem;
-}
+} */
 
 .cabinet-page-adress-picker{
   padding: 1rem;
@@ -118,4 +118,32 @@
 
 .cabinet-page-button:hover {
   box-shadow: 0 0 15px rgb(140, 86, 182, 0.9);
+}
+
+.cabinet-page-map {
+  width: 100%;
+  height: 400px; /* или нужная вам высота */
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.yandex-map-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Для адаптивности на разных экранах */
+@media (max-width: 768px) {
+  .cabinet-page-map {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cabinet-page-map {
+    height: 250px;
+  }
 }

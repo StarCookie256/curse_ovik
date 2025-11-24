@@ -36,9 +36,7 @@ function BrandPage(){
 
   if(loading || !brand){
     return(
-      <div className='loading-container'>
-        Загрузка...
-      </div>
+      <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
     );
   }
 

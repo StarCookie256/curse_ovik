@@ -41,38 +41,54 @@ function SearchPage(){
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const updateProducts = async (newSearchArgs) => {
-    setIsSearching(true);
-    try {
-      setPage(1);
-      await fetchProducts(newSearchArgs, page, setProducts, setPageMax, setTotalCount);
-    } catch (error) {
-      console.error('Search error:', error);
-    } finally {
-      setIsSearching(false);
-  }
-  };
+  const [currentSearchArgs, setCurrentSearchArgs] = useState(searchArgs || {
+    brands: [],
+    categories: [],
+    gender: [],
+    priceValues: [1000, 20000],
+    volumeValues: [10, 600]
+  });
 
+  useEffect(() => {
+    if (location.state) {
+      setCurrentSearchArgs(location.state);
+      setPage(1);
+    }
+  }, [location.state]);
+
+  // Загрузка продуктов с текущими параметрами
   useEffect(() => { 
     const loadProducts = async () => {
       setLoading(true);
       try {
-        await fetchProducts(searchArgs, page, setProducts, setPageMax, setTotalCount);
+        await fetchProducts(currentSearchArgs, page, setProducts, setPageMax, setTotalCount);
       } catch (error) {
         console.error('Error loading products:', error);
       } finally {
         setLoading(false);
       }
     };
-
-    if (searchArgs && page) {
+    
+    if (currentSearchArgs && page) {
       loadProducts();
     } else {
       setLoading(false);
       setProducts([]);
       setTotalCount(0);
     }
-  }, [searchArgs, page]);
+  }, [currentSearchArgs, page]); 
+
+  const updateProducts = async (newSearchArgs) => {
+    setIsSearching(true);
+    try {
+      setCurrentSearchArgs(newSearchArgs); // Сохраняем новые аргументы
+      setPage(1);
+    } catch (error) {
+      console.error('Search error:', error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   // переход на след страницу
   const handleNextPageClick = useCallback(() => {
@@ -98,9 +114,7 @@ function SearchPage(){
 
   if(loading){
     return(
-      <div className='loading-container'>
-        Загрузка...
-      </div>
+      <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
     );
   }
 

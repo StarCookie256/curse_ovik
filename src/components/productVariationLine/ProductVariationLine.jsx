@@ -2,6 +2,8 @@ import './ProductVariationLine.css';
 import { useAuth } from '../../components/context/AuthContext';
 import { basketService } from '../../api/services/basketService';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { dataUpdate } from '../../services/dataUpdate.js';
 
 function ProductVariationLine({
   id,
@@ -11,12 +13,13 @@ function ProductVariationLine({
   volume,
   stock
 }){
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch = useDispatch();
 
   const addToBasket = async () => {
     setIsSubmitting(true);
-    if(user){
+    if(user && isAuthenticated !== false){
 
       try {
         await basketService.addBasketProduct(id);
@@ -26,6 +29,7 @@ function ProductVariationLine({
       }
       finally{
         setIsSubmitting(false);
+        dispatch(dataUpdate());
       }
     }
     else{
@@ -51,7 +55,7 @@ function ProductVariationLine({
   //     alert('Вы не авторизованы!')
   //   }
   // }
-  console.log(user.basketId, "   ", id)
+
   return(
     <div className='product-variation-container'>
       <div className='product-variation'>

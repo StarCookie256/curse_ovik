@@ -22,9 +22,7 @@ function MainPage(){
 
   if(loading){
     return(
-      <div className='loading-container'>
-        Загрузка...
-      </div>
+      <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
     );
   }
 

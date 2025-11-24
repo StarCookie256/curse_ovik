@@ -12,7 +12,6 @@ const realBasketService = {
       const response = await fetch(`${API_BASE_URL}/Basket/count`, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         }
       });
@@ -59,7 +58,7 @@ const realBasketService = {
     }
   },
 
-  addBasketProduct: async (productVariationId) => {
+  addBasketProduct: async (id) => {
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
         
     if (!token) {
@@ -74,7 +73,7 @@ const realBasketService = {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          ProductVariationId: productVariationId // Правильная структура
+          ProductVariationId: id
         })
       });
 
@@ -91,7 +90,7 @@ const realBasketService = {
     }
   },
 
-  deleteBasketProduct: async (basketRequest) => {
+  deleteBasketProduct: async (id) => {
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
         
     if (!token) {
@@ -106,7 +105,7 @@ const realBasketService = {
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          BasketRequest: basketRequest
+          ProductVariationId: id
         })
       });
 

@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import { API_IMAGE_PATH } from '../../api/config';
 
 function CabinetPage(){
-  const {user, refreshProfile} = useAuth();
+  const {user, refreshProfile, checkAuth} = useAuth();
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
     const loadUserData = async () => {
       try {
         setLoading(true);
+        await checkAuth;
         await refreshProfile();
       } catch (error) {
         console.error('Error loading user data:', error);
@@ -20,13 +21,11 @@ function CabinetPage(){
     };
 
     loadUserData();
-  }, [refreshProfile]);
+  }, [checkAuth,refreshProfile]);
 
   if(loading){
     return(
-      <div className='cabinet-page-container'>
-        Загрузка...
-      </div>
+      <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
     );
   }
   console.log(user);
@@ -58,10 +57,15 @@ function CabinetPage(){
 
         <div className='cabinet-page-adress-picker-container'>
           <div className='cabinet-page-map'>
-            заглушка карты яндекс
+            <iframe 
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3Acef6bebaab6125e71087c46125ed0750e2e25e45c012bf382536d6742ccbc0a1&amp;source=constructor"
+              className="yandex-map-iframe"
+              title="Яндекс Карта"
+              allowFullScreen
+            ></iframe>
           </div>
           <div className='cabinet-page-adress-picker'>
-            <p className='cabinet-page-text'>Выбранный адрес: улица пупупупууушкина 42, д.42</p>
+            <p className='cabinet-page-text'>Выбранный адрес: Адрес</p>
             <button className='cabinet-page-button adress'>Выбрать</button>
           </div>
         </div>

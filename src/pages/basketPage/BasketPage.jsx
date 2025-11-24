@@ -5,6 +5,7 @@ import BasketProduct from '../../components/basketProduct/BasketProduct';
 import PerfumeryScrollSearcher from '../../components/perfumeryScrollSearcher/perfumeryScrollSearcher';
 import { useAuth } from '../../components/context/AuthContext';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 async function fetchData(setTotalPrice, setProducts){
   const localBasket = await basketService.getBasketByUserId();
@@ -16,8 +17,9 @@ async function fetchData(setTotalPrice, setProducts){
 };
 
 function BasketPage(){
+  const signal = useSelector(state => state.refresh.signal); // ререндер при добавлении товара в корзину
   const { user } = useAuth();
-  const [totalPrice, setTotalPrice] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState();
 
@@ -33,19 +35,17 @@ function BasketPage(){
     }}
 
     localFetch();
-  }, []);
+  }, [signal]);
 
   if(loading){
     return(
-      <div className='loading-container'>
-        Загрузка...
-      </div>
+      <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
     );
   }
 
   return(
     <div className='basket-page-container'>
-
+      
       <div className='basket-page-back-container'>
         <Link 
           className='basket-page-back' 
@@ -57,25 +57,25 @@ function BasketPage(){
       </div>
 
       <div className='basket-card'>
-        {products 
+        {products && products.length !== 0
         ? (
           <PerfumeryScrollSearcher 
           elements={
             products.map((product) => (
               <BasketProduct
-                id={product.id}
-                productName={product.productName}
-                categoryName={product.categoryName}
-                price={product.price}
-                volume={product.volume}
-                quantity={product.quantity}
+                id={product.productVariation.id}
+                productId={product.id}
+                productName={product.name}
+                categoryName={product.productVariation.category}
+                price={product.productVariation.price}
+                volume={product.productVariation.volume}
+                quantity={product.stock}
                 image={product.image}
               />
             ))
           }
         />
-        )
-        : (
+        ) : (
           <div className='basket-nothing'>
             Корзина пуста
           </div>
@@ -85,7 +85,7 @@ function BasketPage(){
 
       <div className='basket-page-buy-container'>
         <div className='basket-page-buy-info'>
-          <div className='basket-page-total'>Общая цена товаров: <span>{totalPrice} руб.</span></div>
+          <div className='basket-page-total'>Общая цена товаров: <span>{totalPrice ? totalPrice : 0} руб.</span></div>
           <div className='basket-page-info'>
             Посылка прибудет на адрес - {user.address}. <br /> 
             <span>{'Адрес всегда можно изменить в '}
@@ -98,7 +98,7 @@ function BasketPage(){
         </div>
 
         <div className='basket-page-buy-button-container'>
-          <button className='basket-page-buy-button'>Приобрести</button>
+          <button disabled={totalPrice <= 0} className='basket-page-buy-button'>Приобрести</button>
         </div>
       </div>
 

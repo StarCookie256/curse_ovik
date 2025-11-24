@@ -7,7 +7,7 @@ import ProductVariationLine from '../../components/productVariationLine/ProductV
 
 async function fetchData(productId, setProduct){
   const localProduct = await productService.getProductPageInfo(productId);
-  console.log(localProduct);
+
   setProduct(localProduct);
 }
 
@@ -53,9 +53,7 @@ function ProductPage(){
 
   if(loading || !product){
     return(
-      <div className='loading-container'>
-        Загрузка...
-      </div>
+      <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
     );
   }
 

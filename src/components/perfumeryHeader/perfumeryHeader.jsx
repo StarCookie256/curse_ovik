@@ -3,12 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { basketService } from '../../api/services/basketService';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useSelector } from 'react-redux';
 
 function PerfumeryHeader(){
+  const signal = useSelector(state => state.refresh.signal); // ререндер при добавлении товара в корзину
   const {isAuthenticated} = useAuth();
   const location = useLocation();
   const [basketCount, setBasketCount] = useState();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const topHeaderPages = [
     {path:'/main', pageName:'mainPage', label:'Slay💅Star'},
     {path:'/catalog', pageName:'catalog', label:'Каталог товаров'},
@@ -22,26 +24,26 @@ function PerfumeryHeader(){
   useEffect(() => {
     async function fetchData() {
       try {
-        setLoading(true);
+        // setLoading(true);
         const count = await basketService.getBasketItemsCount();
         setBasketCount(count);
       } catch(error) {
         console.error('Error loading basket count:', error);
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     }
 
     fetchData();
-  }, []);
+  }, [signal]);
 
-  if(loading){
-    return(
-      <div className='loading-container'>
-        Загрузка...
-      </div>
-    );
-  }
+  // if(loading){
+  //   return(
+  //     <div className='loading-container'>
+  //       Загрузка...
+  //     </div>
+  //   );
+  // }
 
   return(
     <header className='header-container'>
