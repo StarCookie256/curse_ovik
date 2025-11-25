@@ -120,6 +120,34 @@ const realBasketService = {
       console.error('Basket fetch error:', error);
       throw new Error('Ошибка соединения с сервером');
     }
+  },
+
+  clearBasket: async () => {
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+        
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/Basket/clear`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при запросе на очистку корзины пользователя!');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Basket fetch error:', error);
+      throw new Error('Ошибка соединения с сервером');
+    }
   }
 }
 

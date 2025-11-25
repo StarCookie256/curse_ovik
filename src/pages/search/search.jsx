@@ -28,7 +28,7 @@ async function fetchProducts(searchArgs, page, setProducts, setPageMax, setTotal
   setProducts(response.items);
 }
 
-const PRODUCTS_PER_PAGE = 18;
+const PRODUCTS_PER_PAGE = 20;
 
 function SearchPage(){
   const location = useLocation();

@@ -3,7 +3,7 @@ import { useAuth } from '../../components/context/AuthContext';
 import { useDispatch } from 'react-redux';
 import { dataUpdate } from '../../services/dataUpdate.js'
 import { basketService } from '../../api/services/basketService.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function BasketProduct({
   id,
@@ -15,19 +15,28 @@ function BasketProduct({
   price,
   volume
 }){
-  const [alertMessage, setAlertMessage] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
   const { user, isAuthenticated } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
+  const [imgSrc, setImgSrc] = useState("/no_photo.png");
+
+  useEffect(() => {
+    const checkImage = new Image();
+    checkImage.onload = () => {
+      setImgSrc(image); // Картинка существует
+    };
+    checkImage.onerror = () => {
+      setImgSrc("/no_photo.png"); // Картинка не существует
+    };
+    checkImage.src = image;
+  }, [image]);
+
 
   const addToBasket = async () => {
     setIsSubmitting(true);
     if(user && isAuthenticated !== false){
       try {
         await basketService.addBasketProduct(id);
-        setAlertMessage('Товар успешно добавлен в корзину!');
-        setShowAlert(true);
       } catch (error) {
         console.error('Error loading basket data:', error);
       } finally{
@@ -37,8 +46,6 @@ function BasketProduct({
     }
     else{
       setIsSubmitting(false);
-      setAlertMessage('Вы не авторизованы!');
-      setShowAlert(true);
     }
   }
   
@@ -47,8 +54,6 @@ function BasketProduct({
     if(user && isAuthenticated !== false){
       try {
         await basketService.deleteBasketProduct(id);
-        setAlertMessage('Товар успешно удален из корзины!');
-        setShowAlert(true);
       } catch (error) {
         console.error('Error loading basket data:', error);
       } finally{
@@ -58,14 +63,7 @@ function BasketProduct({
     }
     else{
       setIsSubmitting(false);
-      setAlertMessage('Вы не авторизованы!');
-      setShowAlert(true);
     }
-  }
-
-  if(showAlert){
-    alert(alertMessage);
-    setShowAlert(false);
   }
 
   return(
@@ -75,7 +73,7 @@ function BasketProduct({
         <div className='basket-product-image-container'>
           <img 
             className='basket-product-image'
-            src={image} 
+            src={imgSrc} 
             alt={productName}
           />
         </div>

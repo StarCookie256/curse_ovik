@@ -28,9 +28,15 @@
   align-items: center;
 }
 
-/* .brands-page-navigation{
+.brands-page-navigation{
+  color: #007170;
+  font-size: 1.1rem;
+  transition: color 0.2s ease-in-out;
+}
 
-} */
+.brands-page-navigation:hover{
+  color: rgb(213, 3, 102);
+}
 
 .brands-page-brands-container{
   display: flex;

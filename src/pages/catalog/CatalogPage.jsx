@@ -37,7 +37,7 @@ function CatalogPage(){
         <h3 className='brands-page-navigations-title'>Бренды</h3>
         <div className='brands-page-navigations'>
           {brandNavigations.map((brandNavigation) => (
-            <p className='brands-page-navigation'>{brandNavigation}</p>
+            <a href={`#brandNav-${brandNavigation}`} className='brands-page-navigation'>{brandNavigation}</a>
           ))}
         </div>
       </div>
@@ -45,7 +45,7 @@ function CatalogPage(){
       {brandNavigations.map((brandNavigation) => {
         return(
           <div className='brands-page-brands-container'>
-            <h3 className='brands-page-brand-letter'>{brandNavigation}</h3>
+            <h3 id={`brandNav-${brandNavigation}`} className='brands-page-brand-letter'>{brandNavigation}</h3>
             <div className='brands-page-brands'>
               {brands.map((brand) => {
                 const brandId = brand.id;

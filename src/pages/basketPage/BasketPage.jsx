@@ -5,7 +5,8 @@ import BasketProduct from '../../components/basketProduct/BasketProduct';
 import PerfumeryScrollSearcher from '../../components/perfumeryScrollSearcher/perfumeryScrollSearcher';
 import { useAuth } from '../../components/context/AuthContext';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { dataUpdate } from '../../services/dataUpdate';
 
 async function fetchData(setTotalPrice, setProducts){
   const localBasket = await basketService.getBasketByUserId();
@@ -18,10 +19,12 @@ async function fetchData(setTotalPrice, setProducts){
 
 function BasketPage(){
   const signal = useSelector(state => state.refresh.signal); // ререндер при добавлении товара в корзину
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const localFetch = async () => {
@@ -36,6 +39,23 @@ function BasketPage(){
 
     localFetch();
   }, [signal]);
+
+  const handleBuy = async () => {
+    setIsSubmitting(true);
+    if(user && isAuthenticated !== false){
+      try {
+        await basketService.clearBasket();
+      } catch (error) {
+        console.error('Error clearing basket data:', error);
+      } finally{
+        setIsSubmitting(false);
+        dispatch(dataUpdate());
+      }
+    }
+    else{
+      setIsSubmitting(false);
+    }
+  }
 
   if(loading){
     return(
@@ -98,7 +118,7 @@ function BasketPage(){
         </div>
 
         <div className='basket-page-buy-button-container'>
-          <button disabled={totalPrice <= 0} className='basket-page-buy-button'>Приобрести</button>
+          <button onClick={handleBuy} disabled={totalPrice <= 0 || isSubmitting} className='basket-page-buy-button'>Приобрести</button>
         </div>
       </div>
 

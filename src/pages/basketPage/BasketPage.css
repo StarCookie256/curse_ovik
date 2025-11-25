@@ -97,6 +97,7 @@
   padding: 0.7rem;
   font-size: 1.4rem;
   color: #ffaec8;
+  cursor: pointer;
   font-family: 'NormalTextFont';
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -105,6 +106,10 @@
   color: rgb(127, 51, 89);
   background: #ffaec8;
   border: 5px solid rgb(127, 51, 89);
+}
+
+.basket-page-buy-button:disabled{
+  cursor: default;
 }
 
 .basket-page-buy-button:disabled:hover{

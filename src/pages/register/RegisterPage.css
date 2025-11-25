@@ -1,0 +1,116 @@
+.register-page-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.register-page-title{
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #8c56b6;
+  text-shadow: 0 0.3rem 1.4rem rgb(140, 86, 182, 0.8);
+  font-family: 'HeaderFont';
+  margin-bottom: 1rem;
+}
+
+.register-page-error{
+  color: red;
+  font-size: 1.2rem;
+}
+
+.register-page-form{
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 1rem;
+  border: 2px solid #8c56b6;
+  border-top: 5px solid #8c56b6;
+  border-bottom: 5px solid #8c56b6;
+  box-shadow: 0 0 15px rgb(140, 86, 182, 0.6);
+  border-radius: 16px;
+}
+
+.register-page-reg-part-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.register-page-general-info{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.register-page-input-container{
+  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, 12rem);
+  color: #551067;
+  font-size: 1.3rem !important;
+}
+
+.register-page-input-container label{
+  text-align: left;
+}
+
+.register-page-input{
+  color: #551067;
+  background: none;
+  border: 3px solid rgb(174, 136, 221, 0.9);
+  border-radius: 10px;
+  outline: none;
+  height: 1.2rem;
+  font-family: 'NormalTextFont';
+}
+
+.register-page-image-info-container{
+  margin-left: 6rem;
+  /* align-items: flex-end; */
+  display: flex;
+  flex-direction: column;
+  color: #551067;
+  font-size: 1.2rem !important;
+  gap: 0.2rem;
+}
+
+.register-page-image-info-container label{
+  text-align: left;
+}
+
+.register-page-image-preview{
+  color: #551067;
+  background: none;
+  border: 3px solid rgb(127, 51, 89, 0.8);
+  border-radius: 25px;
+  outline: none;
+  height: 10rem;
+  justify-content: center;
+  display: inline-flex;
+}
+
+.register-page-submit-button{
+  margin-top: auto;
+  width: auto;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  background: linear-gradient(to right, #49296a, rgb(174, 136, 221));
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgb(127, 51, 89, 0.6);
+  font-family: 'NormalTextFont';
+  font-size: 1.5rem;
+}
+
+.register-page-submit-button:disabled{
+  cursor: default;
+}

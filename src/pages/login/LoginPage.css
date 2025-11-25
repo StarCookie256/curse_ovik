@@ -57,7 +57,7 @@
 
 .login-page-submit-button{
   margin-top: auto;
-  width: 12rem;
+  width: 16rem;
   margin-top: 1rem;
   padding: 0.5rem;
   border-radius: 12px;
@@ -79,11 +79,10 @@
 
 .login-page-register-container{
   display: flex;
-  align-items: center;
+  align-self: center;
   height: 100%;
-  width: 100%;
+  width: 12rem;
   text-decoration: none;
-  padding: 0 15px;
   position: relative;
 }
 
