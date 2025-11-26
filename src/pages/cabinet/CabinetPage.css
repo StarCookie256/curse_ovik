@@ -11,8 +11,6 @@
   color: #7f3359;
   font-size: 1.1rem;
   height: auto;
-  min-height: 40vh;
-  margin-bottom: 13.5%;
 }
 
 .cabinet-page-elements-container{
@@ -59,7 +57,6 @@
 }
 
 .cabinet-page-other-info-container{
-  margin-top: 8rem;
   display: flex;
   flex-direction: column;
   align-items: last baseline;
@@ -69,19 +66,16 @@
   margin: 0 !important;
 }
 
+.cabinet-page-text-example{
+  color:#e2b4be;
+}
+
 .cabinet-page-adress-picker-container{
   width: 40%;
   border: 2px solid #7f3359;
   border-radius: 10px;
   height: auto;
 }
-
-/* .cabinet-page-map{
-  background: gainsboro;
-  border-radius: 8px 8px 0 0;
-  flex: 1; 
-  min-height: 15rem;
-} */
 
 .cabinet-page-adress-picker{
   padding: 1rem;

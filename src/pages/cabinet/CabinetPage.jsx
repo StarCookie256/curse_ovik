@@ -49,6 +49,12 @@ function CabinetPage(){
             </div>
           </div>
           <div className='cabinet-page-other-info-container'>
+            <p className='cabinet-page-text-example'>### Заглушка информации о пользователе ###</p>
+            <p className='cabinet-page-text-example'>### Заглушка информации о пользователе ###</p>
+            <p className='cabinet-page-text-example'>### Заглушка информации о пользователе ###</p>
+            <p className='cabinet-page-text-example'>### Заглушка информации о пользователе ###</p>
+            <p className='cabinet-page-text-example'>### Заглушка информации о пользователе ###</p>
+            <p className='cabinet-page-text-example'>### Заглушка информации о пользователе ###</p>
             <p className='cabinet-page-text'>Телефон: {user.phone}</p>
             <p className='cabinet-page-text'>Адрес: {user.address}</p>
           </div>
