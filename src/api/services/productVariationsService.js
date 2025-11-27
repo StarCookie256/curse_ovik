@@ -18,16 +18,16 @@ const mockProductVariations = [
   },
   {
     id: 3,
-    productId: 5,
-    category: "Пуки каки",
+    productId: 1,
+    category: "Парфюм категория 1",
     price: 1999,
     volume: 50,
     stock: 294
   },
   {
     id: 4,
-    productId: 6,
-    category: "Каки пуки",
+    productId: 1,
+    category: "Парфюм категория 2",
     price: 1999,
     volume: 50,
     stock: 294

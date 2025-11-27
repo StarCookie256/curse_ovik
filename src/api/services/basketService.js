@@ -155,7 +155,7 @@ const mockBasketProducts = {
   products: [
     {
       id: 1,
-      productName: 'Газики фембоев',
+      productName: 'Пример товара 1',
       categoryName: 'Парфюмерная вода',
       image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
       quantity: 42,
@@ -164,7 +164,7 @@ const mockBasketProducts = {
     },
     {
       id: 2,
-      productName: 'Газики фембоев',
+      productName: 'Пример товара 2',
       categoryName: 'Парфюмерная вода',
       image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
       quantity: 42,
@@ -173,7 +173,7 @@ const mockBasketProducts = {
     },
     {
       id: 3,
-      productName: 'Газики фембоев',
+      productName: 'Пример товара 3',
       categoryName: 'Парфюмерная вода',
       image: 'https://shikimori.one/uploads/poster/characters/79995/main_alt-f083b9fc0baf74cb7d475ef9c368ae7b.jpeg',
       quantity: 42,
