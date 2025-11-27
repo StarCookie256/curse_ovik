@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './RegisterPage.css';
 import { useAuth } from '../../components/context/AuthContext';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 
 function validateValues(username, email, password, phone, image, setRegError, setIsSubmitting){
   setIsSubmitting(true);

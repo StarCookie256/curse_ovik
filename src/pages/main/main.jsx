@@ -15,9 +15,19 @@ function MainPage(){
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-    fetchData(setProducts);
-    setLoading(false);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const productData = await productService.getProductsOfDay();
+        setProducts(productData);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   if(loading){

@@ -1,7 +1,7 @@
 import './search.css';
 import FilterBar from '../../components/filterBar/filterBar';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
 import SearchPaginator from '../../components/searchPaginator/searchPaginator';

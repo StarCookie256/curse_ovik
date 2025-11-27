@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import './BrandPage.css';
 import { useEffect, useState } from 'react';
 import { brandsService } from '../../api/services/brandsService';
 import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 async function fetchData(brandId, setProducts, setBrand){
 

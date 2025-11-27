@@ -1,7 +1,7 @@
 import './CatalogPage.css';
 import { brandsService } from '../../api/services/brandsService';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 async function fetchData(setBrands, setBrandNavigations){
   let localBrandsList = [];

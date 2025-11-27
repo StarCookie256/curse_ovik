@@ -1,6 +1,6 @@
 import './ProductPage.css';
 import { productService } from '../../api/services/productsService';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router';
 import { useEffect, useState } from 'react';
 import PerfumeryScrollSearcher from '../../components/perfumeryScrollSearcher/perfumeryScrollSearcher';
 import ProductVariationLine from '../../components/productVariationLine/ProductVariationLine';
