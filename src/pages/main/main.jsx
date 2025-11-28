@@ -4,11 +4,6 @@ import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
 import FilterBar from '../../components/filterBar/filterBar';
 
-async function fetchData(setProducts){
-  const productData = await productService.getProductsOfDay();
-
-  setProducts(productData);
-}
 
 function MainPage(){
   const [products, setProducts] = useState([]);
