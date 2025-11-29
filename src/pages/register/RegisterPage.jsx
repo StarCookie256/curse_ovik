@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './RegisterPage.css';
 import { useAuth } from '../../components/context/AuthContext';
 import { useLocation, useNavigate } from 'react-router';
+import { dataUpdate } from '../../services/dataUpdate.js';
+import { useDispatch } from 'react-redux';
 
 function validateValues(username, email, password, phone, image, setRegError, setIsSubmitting){
   setIsSubmitting(true);
@@ -102,6 +104,7 @@ function RegisterPage(){
   const [image, setImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [regError, setRegError] = useState(null);
+  const dispatch = useDispatch();
 
   const {register: reg, error} = useAuth();
   const navigate = useNavigate();
@@ -153,6 +156,7 @@ function RegisterPage(){
       setRegError(error);
       // ошибка уже установлена в контексте
     } finally {
+      dispatch(dataUpdate());
       setIsSubmitting(false);
     }
   };

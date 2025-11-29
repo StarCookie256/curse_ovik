@@ -3,9 +3,17 @@ import './perfumeryFooter.css';
 
 function PerfumeryFooter(){
   const feedbackOptions = [
-    {path: 'https://t.me/StarCookie256', icon: '/perfumery-telegram-var-two.png', name:'telegram'},
-    {path: 'mailto:sopov.cookie@gmail.com', icon: '/perfumery-gmail-var-one.png', name:'e-mail'}
-  ]
+  {
+    path: 'https://t.me/StarCookie256', 
+    icon: process.env.PUBLIC_URL + '/images/perfumery-telegram-var-two.png', 
+    name: 'telegram'
+  },
+  {
+    path: 'mailto:sopov.cookie@gmail.com', 
+    icon: process.env.PUBLIC_URL + '/images/perfumery-gmail-var-one.png', 
+    name: 'e-mail'
+  }
+];
 
   return(
     <div className='perfumeryFooter-container'>

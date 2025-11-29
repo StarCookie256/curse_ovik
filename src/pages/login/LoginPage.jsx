@@ -2,14 +2,15 @@ import './LoginPage.css';
 import { useAuth } from '../../components/context/AuthContext';
 import { useNavigate, useLocation, Link } from 'react-router';
 import { useEffect, useState } from 'react';
-
-
+import { dataUpdate } from '../../services/dataUpdate.js';
+import { useDispatch } from 'react-redux';
 
 function LoginPage(){
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [regError, setRegError] = useState(null);
+  const dispatch = useDispatch();
   
   const { login: authLogin, error } = useAuth();
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ function LoginPage(){
       // ошибка уже установлена в контексте
     } finally {
       setIsSubmitting(false);
+      dispatch(dataUpdate());
     }
   };
 

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './productCard.css';
 import { useEffect, useState } from 'react';
+import { NO_PHOTO } from '../../api/config';
 
 function ProductCard({
   id,
@@ -22,7 +23,7 @@ function ProductCard({
       setImgSrc(image); // Картинка существует
     };
     checkImage.onerror = () => {
-      setImgSrc("/no_photo.png"); // Картинка не существует
+      setImgSrc(NO_PHOTO); // Картинка не существует
     };
     checkImage.src = image;
   }, [image]);

@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router';
 import { useEffect, useState } from 'react';
 import PerfumeryScrollSearcher from '../../components/perfumeryScrollSearcher/perfumeryScrollSearcher';
 import ProductVariationLine from '../../components/productVariationLine/ProductVariationLine';
+import { NO_PHOTO } from '../../api/config';
 
 async function fetchData(productId, setProduct){
   const localProduct = await productService.getProductPageInfo(productId);
@@ -21,7 +22,9 @@ function ProductPage(){
     const loadProduct = async () => {
       try{
         setLoading(true);
-        await fetchData(productId, setProduct)
+        const localProduct = await productService.getProductPageInfo(productId);
+
+        setProduct(localProduct);
       }
       catch(error){
         console.error('Error loading user data:', error);
@@ -43,11 +46,11 @@ function ProductPage(){
         setImgSrc(product.image); // Картинка существует
       };
       checkImage.onerror = () => {
-        setImgSrc("/no_photo.png"); // Картинка не существует
+        setImgSrc(NO_PHOTO); // Картинка не существует
       };
       checkImage.src = product.image;
     } else {
-      setImgSrc("/no_photo.png");
+      setImgSrc(NO_PHOTO);
     }
   }, [product]); // Зависимость от product
 

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { dataUpdate } from '../../services/dataUpdate.js'
 import { basketService } from '../../api/services/basketService.js';
 import { useEffect, useState } from 'react';
+import { NO_PHOTO } from '../../api/config.js';
 
 function BasketProduct({
   id,
@@ -18,7 +19,7 @@ function BasketProduct({
   const { user, isAuthenticated } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
-  const [imgSrc, setImgSrc] = useState("/no_photo.png");
+  const [imgSrc, setImgSrc] = useState(NO_PHOTO);
 
   useEffect(() => {
     const checkImage = new Image();
@@ -26,7 +27,7 @@ function BasketProduct({
       setImgSrc(image); // Картинка существует
     };
     checkImage.onerror = () => {
-      setImgSrc("/no_photo.png"); // Картинка не существует
+      setImgSrc(NO_PHOTO); // Картинка не существует
     };
     checkImage.src = image;
   }, [image]);

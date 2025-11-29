@@ -2,7 +2,7 @@
   "name": "curse_ovik",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://starcookie256.github.io/curse_ovik",
+  "homepage": ".",
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.0",
     "@testing-library/dom": "^10.4.1",

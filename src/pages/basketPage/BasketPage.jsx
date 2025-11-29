@@ -11,8 +11,6 @@ import { dataUpdate } from '../../services/dataUpdate';
 async function fetchData(setTotalPrice, setProducts){
   const localBasket = await basketService.getBasketByUserId();
 
-  console.log(localBasket);
-
   setTotalPrice(localBasket.totalPrice);
   setProducts(localBasket.basketItems);
 };

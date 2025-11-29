@@ -28,7 +28,7 @@ function CabinetPage(){
       <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
     );
   }
-  console.log(user);
+ 
   return(
     <div className='cabinet-page-container'>
       <div className='cabinet-page-elements-container'>
