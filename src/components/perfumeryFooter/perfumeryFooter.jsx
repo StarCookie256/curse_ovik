@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import './perfumeryFooter.css';
 
 function PerfumeryFooter(){
@@ -18,7 +18,7 @@ function PerfumeryFooter(){
   return(
     <div className='perfumeryFooter-container'>
       <div className='perfumeryFooter-info'>
-        Copyright 2025–2025 © StarCookie-Perfumery.ru — Интернет-магазин косметики<br/>
+        Copyright 2025–2025 © StarCookie-Perfumery.ru — Интернет-магазин парфюмерии<br/>
         Все права защищены. Доставка по Москве, Санкт-Петербургу и другим городам России.<br/>
         Телефоны в Москве: +7 XXX XXX XX-XX, в Санкт-Петербурге: +7 XXX XXX XX-XX,<br/>
         по России (бесплатно): 8 XXX XXX XX-XX

@@ -123,3 +123,112 @@
   color: white;
   background-color: rgb(127, 51, 89);
 }
+
+
+/* МОБИЛКА */
+.header-container-mobile{
+  height: 8rem;
+  min-height: 8rem;
+  background: linear-gradient(to bottom, rgb(127, 51, 89),rgba(255, 156, 187, 0.7));
+  box-shadow: 2px 2px 1rem rgb(127, 51, 89, 0.4);
+  flex-direction: row;
+  display: flex;
+  font-family: 'HeaderFont' !important;
+  user-select: none;
+}
+
+.header-mobile-title{
+  display: flex;
+  width: 100%;
+  justify-content: right;
+  padding-right: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(255, 174, 200, 0.5);
+  text-shadow: 0 0 0.4rem rgb(255, 174, 200, 0.4);
+  padding-left: 5rem;
+  align-self: center;
+}
+
+.header-container-mobile .header-item-link{
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  text-decoration: none;
+  position: relative;
+}
+
+.header-container-mobile .header-item{
+  font-size: 24px;
+  color: white;
+  font-family: 'NormalTextFont';
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.header-container-mobile .header-item:hover{
+  color: rgb(213, 3, 102);
+  text-shadow: 0 0 0.3rem rgb(213, 3, 102, 0.9);
+  transform: none;
+}
+
+.bm-burger-button {
+  position: absolute;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: rgb(127, 51, 89);
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: rgb(213, 3, 102);
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: rgb(213, 3, 102);
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: linear-gradient(to left, rgb(127, 51, 89),rgba(255, 156, 187));
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}

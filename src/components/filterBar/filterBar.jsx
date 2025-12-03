@@ -2,7 +2,7 @@ import './filterBar.css';
 import PerfumeryCheckbox from '../perfumeryCheckbox/perfumeryCheckbox';
 import PerfumerySlider from '../perfumerySlider/perfumerySlider';
 import PerfumeryScrollSearcher from '../perfumeryScrollSearcher/perfumeryScrollSearcher';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { brandsService } from '../../api/services/brandsService';
 import { categoriesService } from '../../api/services/categoriesService';

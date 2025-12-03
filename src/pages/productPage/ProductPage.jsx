@@ -6,12 +6,6 @@ import PerfumeryScrollSearcher from '../../components/perfumeryScrollSearcher/pe
 import ProductVariationLine from '../../components/productVariationLine/ProductVariationLine';
 import { NO_PHOTO } from '../../api/config';
 
-async function fetchData(productId, setProduct){
-  const localProduct = await productService.getProductPageInfo(productId);
-
-  setProduct(localProduct);
-}
-
 function ProductPage(){
   const { brandId, productId } = useParams();
   const [product, setProduct] = useState(null);

@@ -8,8 +8,8 @@ export const CURRENT_MODE = API_MODE.REAL;
 export const AUTH_TOKEN_KEY = 'auth_token';
 export const USER_DATA_KEY = 'user_data';
 
-export const API_BASE_URL = '/api';
+export const API_BASE_URL = 'https://localhost:7263/api';
 
-export const API_IMAGE_PATH = '/static'
+export const API_IMAGE_PATH = 'https://localhost:7263/static'
 
 export const NO_PHOTO = process.env.PUBLIC_URL + '/images/no_photo.png';

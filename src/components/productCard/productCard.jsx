@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import './productCard.css';
 import { useEffect, useState } from 'react';
 import { NO_PHOTO } from '../../api/config';
