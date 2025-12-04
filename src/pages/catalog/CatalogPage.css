@@ -1,7 +1,10 @@
 .brands-page-container{
   display: flex;
   flex-direction: column;
-  padding: 2rem 15rem 1rem 15rem;
+  margin: auto;
+  width: 90%;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
   color: #007170;
 }
 
@@ -71,4 +74,52 @@
 .brands-page-brand:hover{
   color: rgb(213, 3, 102);
   text-shadow: 0px 0px 2.7rem rgb(213, 3, 102, 0.9);
+}
+
+
+/* МОБИЛКА */
+
+.brands-page-container .true{
+  width: 80%;
+  margin: auto;
+}
+
+.brands-page-container .true .brands-page-navigations{
+  gap: 1.25rem;
+}
+
+.brands-page-container .true .brands-page-navigation{
+  font-size: 1.5rem;
+  gap: 1.5rem;
+}
+
+.brands-page-container .szh-accordion{
+  border-top: 0.35rem dashed #6fc3c4;
+  width: 80%;
+}
+
+.brands-page-container .szh-accordion__item{
+  border-bottom: 0.35rem dashed #6fc3c4;
+}
+
+.brands-page-container .accordion-button{
+  color: #007170;
+  text-shadow: 0 0 2.8rem #007170;
+  background-color: rgb(193, 229, 233, 0.5);
+}
+
+.brands-page-container .accordion-item-content{
+  text-align: left;
+}
+
+.brands-page-container .szh-accordion__item-panel{
+  gap: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(193, 229, 233, 0.5);
+}
+
+.szh-accordion__item-panel .brands-page-brand{
+  text-shadow: 0px 0px 6rem #007170;
+  width: fit-content;
 }

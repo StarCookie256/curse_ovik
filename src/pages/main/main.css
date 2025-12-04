@@ -1,5 +1,7 @@
 .main-page-container{
   font-family: 'NormalTextFont';
+  display: flex;
+  flex-direction: column;
 }
 
 .main-page-title {

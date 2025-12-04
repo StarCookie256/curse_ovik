@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
 import FilterBar from '../../components/filterBar/filterBar';
-import { Accordion, AccordionItem } from '@szhsin/react-accordion';
+import CustomAccordion from '../../components/customAccordion/CustomAccordion';
 
 function MainPage(){
   const [products, setProducts] = useState([]);
@@ -57,11 +57,14 @@ function MainPage(){
 
       {mobileMode ? (
         <div className='main-page-components-mobile'>
-          <Accordion>
-            <AccordionItem header="Поиск по фильтру">
-              <FilterBar />
-            </AccordionItem>
-          </Accordion>
+          <CustomAccordion 
+            elements={[
+              {
+                headerName: "Поиск по фильтру",
+                inside: <FilterBar />
+              }
+            ]}
+          />
 
           <div className='main-page-products'>
             {products.map((product) => (
