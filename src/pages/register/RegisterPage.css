@@ -1,8 +1,10 @@
 .register-page-container{
-  flex: 1;
   display: flex;
   flex-direction: column;
   overflow: visible;
+  margin: auto;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .register-page-title{
@@ -113,4 +115,20 @@
 
 .register-page-submit-button:disabled{
   cursor: default;
+}
+
+
+/* МОБИЛКА */
+
+.register-page-container.true .register-page-reg-part-container{
+  flex-direction: column;
+}
+
+.register-page-container.true .register-page-input-container{
+  display: grid;
+  grid-template-columns:none;
+}
+
+.register-page-container.true .register-page-image-info-container{
+  margin-left: 0;
 }

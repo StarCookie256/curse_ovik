@@ -20,6 +20,8 @@ function BasketProduct({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
   const [imgSrc, setImgSrc] = useState(NO_PHOTO);
+  const [mobileMode, setMobileMode] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const checkImage = new Image();
@@ -67,8 +69,26 @@ function BasketProduct({
     }
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth < 1100 && !mobileMode) {
+      setMobileMode(true);
+    } else if (windowWidth >= 1100 && mobileMode) {
+      setMobileMode(false);
+    }
+  }, [windowWidth, mobileMode]); 
+
   return(
-    <div className='basket-product-container'>
+    <div className={`basket-product-container ${mobileMode}`}>
       <div className='basket-product'>
 
         <div className='basket-product-image-container'>

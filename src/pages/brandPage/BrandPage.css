@@ -1,7 +1,10 @@
 .brand-page-container{
   display: flex;
   flex-direction: column;
-  padding: 3rem 15rem 1rem 15rem;
+  margin: auto;
+  width: 80%;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
   color: #d50366; 
 }
 
@@ -79,4 +82,29 @@
   margin: 1.5rem;
   font-size: 2rem;
   color:rgb(0, 113, 112, 0.6);
+}
+
+
+/* МОБИЛКА */
+
+.brand-page-container .szh-accordion{
+  border-top: 0.35rem dotted #6fc3c4;
+}
+
+.brand-page-container .szh-accordion__item{
+  border-bottom: 0.35rem dotted #6fc3c4;
+}
+
+.brand-page-container .accordion-button{
+  color: #007170;
+  text-shadow: 0 0 2.8rem #007170;
+  background-color: rgb(193, 229, 233, 0.5);
+}
+
+.brand-page-container .szh-accordion__item-panel{
+  background-color: rgb(193, 229, 233, 0.5);
+}
+
+.brand-page-container .accordion-item-content{
+  text-align: left;
 }

@@ -23,6 +23,8 @@ function BasketPage(){
   const [loading, setLoading] = useState();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
+  const [mobileMode, setMobileMode] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const localFetch = async () => {
@@ -55,6 +57,24 @@ function BasketPage(){
     }
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth < 1100 && !mobileMode) {
+      setMobileMode(true);
+    } else if (windowWidth >= 1100 && mobileMode) {
+      setMobileMode(false);
+    }
+  }, [windowWidth, mobileMode]); 
+
   if(loading){
     return(
       <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
@@ -62,7 +82,7 @@ function BasketPage(){
   }
 
   return(
-    <div className='basket-page-container'>
+    <div className={`basket-page-container ${mobileMode}`}>
       
       <div className='basket-page-back-container'>
         <Link 

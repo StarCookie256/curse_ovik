@@ -1,7 +1,7 @@
 import './ProductVariationLine.css';
 import { useAuth } from '../../components/context/AuthContext';
 import { basketService } from '../../api/services/basketService';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { dataUpdate } from '../../services/dataUpdate.js';
 
@@ -16,6 +16,8 @@ function ProductVariationLine({
   const { user, isAuthenticated } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
+  const [mobileMode, setMobileMode] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const addToBasket = async () => {
     setIsSubmitting(true);
@@ -38,26 +40,26 @@ function ProductVariationLine({
     }
   }
 
-  // const deleteFromBasket = async () => {
-  //   if(user){
-  //     const basketRequest = new FormData();
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
 
-  //     basketRequest.append('BasketId', user.basketId);
-  //     basketRequest.append('ProductVariationId', id);
+    window.addEventListener('resize', handleResize);
 
-  //     try {
-  //       await basketService.deleteBasketProduct(basketRequest);
-  //     } catch (error) {
-  //       console.error('Error loading basket data:', error);
-  //     }
-  //   }
-  //   else{
-  //     alert('Вы не авторизованы!')
-  //   }
-  // }
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth < 1100 && !mobileMode) {
+      setMobileMode(true);
+    } else if (windowWidth >= 1100 && mobileMode) {
+      setMobileMode(false);
+    }
+  }, [windowWidth, mobileMode]);
 
   return(
-    <div className='product-variation-container'>
+    <div className={`product-variation-container ${mobileMode}`}>
       <div className='product-variation'>
         <div className='product-variation-category'>{category}</div>
         <div className='product-variation-volume'>{volume} мл.</div>

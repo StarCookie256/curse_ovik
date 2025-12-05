@@ -1,7 +1,10 @@
 .cabinet-page-container{
   display: flex;
   flex-direction: column;
-  margin: 1rem 6rem 1rem 6rem;
+  margin: auto;
+  width: 85%;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
   padding: 1rem;
   border: 2px solid #8c56b6;
   border-top: 5px solid #8c56b6;
@@ -140,4 +143,40 @@
   .cabinet-page-map {
     height: 250px;
   }
+}
+
+
+/* МОБИЛКА */
+
+.cabinet-page-container.true .cabinet-page-top-info-container{
+  flex-direction: column;
+}
+
+.cabinet-page-container.true .cabinet-page-top-info{
+  align-items: center;
+  text-align: center;
+}
+
+.cabinet-page-container.true .cabinet-page-other-info-container{
+  align-items: normal;
+}
+
+.cabinet-page-container.true .cabinet-page-info-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items:baseline;
+  justify-content: space-between;
+}
+
+.cabinet-page-container.true .cabinet-page-elements-container{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.cabinet-page-container.true .cabinet-page-adress-picker-container{
+  width: auto;
+  height: auto;
 }

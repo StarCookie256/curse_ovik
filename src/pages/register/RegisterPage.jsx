@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './RegisterPage.css';
 import { useAuth } from '../../components/context/AuthContext';
 import { useLocation, useNavigate } from 'react-router';
@@ -105,6 +105,8 @@ function RegisterPage(){
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [regError, setRegError] = useState(null);
   const dispatch = useDispatch();
+  const [mobileMode, setMobileMode] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const {register: reg, error} = useAuth();
   const navigate = useNavigate();
@@ -161,8 +163,26 @@ function RegisterPage(){
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth < 1100 && !mobileMode) {
+      setMobileMode(true);
+    } else if (windowWidth >= 1100 && mobileMode) {
+      setMobileMode(false);
+    }
+  }, [windowWidth, mobileMode]); 
+
   return(
-    <div className='register-page-container'>
+    <div className={`register-page-container ${mobileMode}`}>
       <h2 className='register-page-title'>Регистрация</h2>
 
       <form 
@@ -174,6 +194,7 @@ function RegisterPage(){
           <div className='register-page-general-info'>
             <div className="register-page-input-container username">
               <label>Псевдоним/ФИО:</label>
+              {mobileMode && <br />}
               <input
                 className='register-page-input username'
                 type="text"
@@ -185,6 +206,7 @@ function RegisterPage(){
 
             <div className="register-page-input-container email">
               <label>Почта:</label>
+              {mobileMode && <br />}
               <input
                 className='register-page-input email'
                 type="email"
@@ -196,6 +218,7 @@ function RegisterPage(){
 
             <div className="register-page-input-container password">
               <label>Пароль:</label>
+              {mobileMode && <br />}
               <input
                 className='register-page-input password'
                 type="password"
@@ -207,6 +230,7 @@ function RegisterPage(){
 
             <div className="register-page-input-container phone">
               <label>Телефонный номер:</label>
+              {mobileMode && <br />}
               <input
                 className='register-page-input phone'
                 type="tel"

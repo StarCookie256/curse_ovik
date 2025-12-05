@@ -1,7 +1,10 @@
 .product-page-container{
   display: flex;
   flex-direction: column;
-  padding: 2rem 20rem 2rem 20rem;
+  margin: auto;
+  width: 80%;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .product-page-back-container{
@@ -125,4 +128,71 @@
   max-height: 15rem;
   min-height: 15rem;
   gap: 1.4rem;
+}
+
+
+/* МОБИЛКА */
+
+.product-page-container.true .product-page-image-container{
+  max-width: 80% !important;
+  max-height: 40% !important;
+  min-width: 50% !important;
+  min-height: 40% !important;
+  margin-bottom: 1rem !important;
+}
+
+@media (max-width: 450px) {
+  .product-page-container.true .product-page-image-container{
+    max-width: 80% !important;
+    min-width: 80% !important;
+  }
+}
+
+.product-page-container.true .product-page-product-card-info{
+  margin: auto;
+  color: #fe7d31;
+  max-width: 100% !important;
+  min-height: 1rem;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.product-page-container.true .szh-accordion{
+  width: 100%;
+}
+
+.product-page-container .szh-accordion__item-panel{
+  gap: 1.7rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-bottom: 1.3rem;
+}
+
+.product-page-container .szh-accordion{
+  margin-top: 3rem !important;
+  border-top: 0.35rem dotted #fe7d31;
+}
+
+.product-page-container .szh-accordion__item{
+  border-bottom: 0.35rem dotted #fe7d31;
+}
+
+.product-page-container .accordion-button{
+  color: rgb(0, 113, 112, 0.8);
+  text-shadow: 0 0 2rem rgb(0, 113, 112, 0.75);
+  font-family: 'HeaderFont';
+  font-size: 1.7rem;
+}
+
+.product-page-description-container .szh-accordion__item-panel{
+  color: rgb(0, 113, 112, 0.6);
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  font-size: 1.1rem;
+  text-align: left;
 }

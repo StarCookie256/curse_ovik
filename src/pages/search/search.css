@@ -3,3 +3,18 @@
   font-size: 2rem;
   color:rgb(140, 86, 182);
 }
+
+/* МОБИЛКА */
+
+.main-page-container.true .main-page-products{
+  min-width: none;
+  max-width: none;
+  padding: 1.5rem;
+  justify-content: center;
+  padding-top: 0.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 12.5rem);
+  gap: 1rem;
+  min-height: 0;
+  overflow: visible;
+}

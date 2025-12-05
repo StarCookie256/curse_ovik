@@ -5,12 +5,15 @@ import { useEffect, useState } from 'react';
 import PerfumeryScrollSearcher from '../../components/perfumeryScrollSearcher/perfumeryScrollSearcher';
 import ProductVariationLine from '../../components/productVariationLine/ProductVariationLine';
 import { NO_PHOTO } from '../../api/config';
+import CustomAccordion from '../../components/customAccordion/CustomAccordion';
 
 function ProductPage(){
   const { brandId, productId } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [imgSrc, setImgSrc] = useState("/no_photo.png");
+  const [mobileMode, setMobileMode] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   
   useEffect(() => {
     const loadProduct = async () => {
@@ -48,6 +51,24 @@ function ProductPage(){
     }
   }, [product]); // Зависимость от product
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth < 1100 && !mobileMode) {
+      setMobileMode(true);
+    } else if (windowWidth >= 1100 && mobileMode) {
+      setMobileMode(false);
+    }
+  }, [windowWidth, mobileMode]); 
+
   if(loading || !product){
     return(
       <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
@@ -55,7 +76,7 @@ function ProductPage(){
   }
 
   return(
-    <div className='product-page-container'>
+    <div className={`product-page-container ${mobileMode}`}>
 
       <div className='product-page-back-container'>
         <Link 
@@ -74,7 +95,8 @@ function ProductPage(){
         <span> / {product.name}</span>
       </div>
 
-      <div className='product-page-product-card'>
+      {mobileMode ? (
+        <>
         <div className='product-page-image-container'>
           <img 
             className='product-page-image' 
@@ -94,33 +116,90 @@ function ProductPage(){
             {product.gender && <p className='product-page-text gender'>Пол: <span>{product.gender === 'male' ? 'для мужчин' : 'для женщин'}</span> </p>}
           </div>
         </div>
-      </div>
 
-      <div className='product-page-variations-container'>
-        <div className='product-page-section-title'>Варианты товара</div>
-        <PerfumeryScrollSearcher 
-          elements={
-            product.productVariations.map((productVariation) => (
-              <ProductVariationLine
-                id={productVariation.id}
-                productId={product.id}
-                category={productVariation.category}
-                price={productVariation.price}
-                volume={productVariation.volume}
-                stock={productVariation.stock}
-              />
-            ))
-          }
-        />
-      </div>
-
-      <div className='product-page-description-container'>
-        <div className='product-page-section-title'>Описание</div>
-        <div className='product-page-description'>
-          Погрузитесь в мир изысканной парфюмерии с ароматом {product.brand.name} {product.name}. Это уникальное творение — больше, чем просто духи, это ключ к вашему внутреннему состоянию и яркий акцент в вашем образе. {product.brand.name} {product.name} — это гармоничный симбиоз тщательно отобранных нот, которые раскрываются на коже, создавая неповторимый шлейф. Композиция начинается с яркого и соблазнительного шлейфа, который плавно переходит в сердцевину, раскрывающую всю глубину и характер аромата. Финальная же базовая нота оставляет за собой незабываемый, стойкий след в памяти окружающих. Идеально сбалансированная формула подчеркивает индивидуальность, позволяя аромату звучать по-разному в зависимости от своей обладательницы или обладателя. {product.brand.name} {product.name} создан для тех, кто ценит качество, стремится к самовыражению и не боится быть замеченным. Позвольте себе роскошь быть особенным каждый день с {product.brand.name} {product.name}.
+        <div className='product-page-variations-container'>
+          <CustomAccordion 
+            elements={[
+              {
+                headerName: "Варианты товара",
+                inside: <>{
+                  product.productVariations.map((productVariation) => (
+                    <ProductVariationLine
+                      id={productVariation.id}
+                      productId={product.id}
+                      category={productVariation.category}
+                      price={productVariation.price}
+                      volume={productVariation.volume}
+                      stock={productVariation.stock}
+                    />
+                  ))}
+                </>
+              }
+            ]}
+          />
         </div>
-      </div>
 
+        <div className='product-page-description-container'>
+          <CustomAccordion 
+            elements={[
+              {
+                headerName: "Описание",
+                inside: <>Погрузитесь в мир изысканной парфюмерии с ароматом {product.brand.name} {product.name}. Это уникальное творение — больше, чем просто духи, это ключ к вашему внутреннему состоянию и яркий акцент в вашем образе. {product.brand.name} {product.name} — это гармоничный симбиоз тщательно отобранных нот, которые раскрываются на коже, создавая неповторимый шлейф. Композиция начинается с яркого и соблазнительного шлейфа, который плавно переходит в сердцевину, раскрывающую всю глубину и характер аромата. Финальная же базовая нота оставляет за собой незабываемый, стойкий след в памяти окружающих. Идеально сбалансированная формула подчеркивает индивидуальность, позволяя аромату звучать по-разному в зависимости от своей обладательницы или обладателя. {product.brand.name} {product.name} создан для тех, кто ценит качество, стремится к самовыражению и не боится быть замеченным. Позвольте себе роскошь быть особенным каждый день с {product.brand.name} {product.name}.</>
+              }
+            ]}
+          />
+        </div>
+        </>
+      ) : (
+        <>
+        <div className='product-page-product-card'>
+          <div className='product-page-image-container'>
+            <img 
+              className='product-page-image' 
+              src={imgSrc}
+              alt={product.name}
+            />
+          </div>
+
+          <div className='product-page-product-card-info'>
+            <p className='product-page-title-gender'>{product.gender === 'male' ? 'Мужская парфюмерия' : 'Женская парфюмерия'}</p>
+            <p className='product-page-title'>{product.name}</p>
+            <div className='product-page-details'>
+              {product.country && <p className='product-page-text country'>Страна производителя: <span>{product.country}</span> </p>}
+              {product.brand && product.brand.name && (<p className='product-page-text brand'>Бренд: <span>{product.brand.name}</span> </p>)}
+              {product.manufactureYear && <p className='product-page-text date'>Год выпуска: <span>{product.manufactureYear}</span> </p>}
+              {product.expirationDate && <p className='product-page-text expiration-date'>Срок годности: <span>{product.expirationDate}</span> </p>}
+              {product.gender && <p className='product-page-text gender'>Пол: <span>{product.gender === 'male' ? 'для мужчин' : 'для женщин'}</span> </p>}
+            </div>
+          </div>
+        </div>
+
+        <div className='product-page-variations-container'>
+          <div className='product-page-section-title'>Варианты товара</div>
+          <PerfumeryScrollSearcher 
+            elements={
+              product.productVariations.map((productVariation) => (
+                <ProductVariationLine
+                  id={productVariation.id}
+                  productId={product.id}
+                  category={productVariation.category}
+                  price={productVariation.price}
+                  volume={productVariation.volume}
+                  stock={productVariation.stock}
+                />
+              ))
+            }
+          />
+        </div>
+
+        <div className='product-page-description-container'>
+          <div className='product-page-section-title'>Описание</div>
+          <div className='product-page-description'>
+            Погрузитесь в мир изысканной парфюмерии с ароматом {product.brand.name} {product.name}. Это уникальное творение — больше, чем просто духи, это ключ к вашему внутреннему состоянию и яркий акцент в вашем образе. {product.brand.name} {product.name} — это гармоничный симбиоз тщательно отобранных нот, которые раскрываются на коже, создавая неповторимый шлейф. Композиция начинается с яркого и соблазнительного шлейфа, который плавно переходит в сердцевину, раскрывающую всю глубину и характер аромата. Финальная же базовая нота оставляет за собой незабываемый, стойкий след в памяти окружающих. Идеально сбалансированная формула подчеркивает индивидуальность, позволяя аромату звучать по-разному в зависимости от своей обладательницы или обладателя. {product.brand.name} {product.name} создан для тех, кто ценит качество, стремится к самовыражению и не боится быть замеченным. Позвольте себе роскошь быть особенным каждый день с {product.brand.name} {product.name}.
+          </div>
+        </div>
+        </>
+      )}
     </div>
   );
 }

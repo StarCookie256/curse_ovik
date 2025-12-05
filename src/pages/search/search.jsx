@@ -5,6 +5,7 @@ import { useLocation } from 'react-router';
 import { productService } from '../../api/services/productsService';
 import ProductCard from '../../components/productCard/productCard';
 import SearchPaginator from '../../components/searchPaginator/searchPaginator';
+import CustomAccordion from '../../components/customAccordion/CustomAccordion';
 
 async function fetchProducts(searchArgs, page, setProducts, setPageMax, setTotalCount) {
   if(searchArgs == null || page == null) return;
@@ -40,6 +41,8 @@ function SearchPage(){
   const [pageMax, setPageMax] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [mobileMode, setMobileMode] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const [currentSearchArgs, setCurrentSearchArgs] = useState(searchArgs || {
     brands: [],
@@ -112,6 +115,24 @@ function SearchPage(){
     }
   }, [isSearching]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth < 1100 && !mobileMode) {
+      setMobileMode(true);
+    } else if (windowWidth >= 1100 && mobileMode) {
+      setMobileMode(false);
+    }
+  }, [windowWidth, mobileMode]); 
+
   if(loading){
     return(
       <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
@@ -119,10 +140,32 @@ function SearchPage(){
   }
 
   return(
-    <div className='main-page-container'>
+    <div className={`main-page-container ${mobileMode}`}>
       <div className='main-page-title'>Найдено товаров: {totalCount ?? 0}</div>
 
-      <div className='main-page-components-container'>
+      {mobileMode ? (
+        <>
+        <CustomAccordion 
+          elements={[
+            {
+              headerName: "Поиск по фильтру",
+              inside: <FilterBar onSearch={updateProducts} ref={buttonRef} isSearching={isSearching} />
+            }
+          ]}
+        />
+        <div className='search-page-paginator-container'>
+          {products && (
+            <SearchPaginator
+              onNextPageClick={handleNextPageClick}
+              onPrevPageClick={handlePrevPageClick}
+              disable={{
+                left: page === 1,
+                right: page === pageMax,
+              }}
+              nav={{ current: page, total: pageMax }}
+            />
+          )}
+        </div>
         {products.length > 0 
         ? (
           <div className='main-page-products'>
@@ -144,23 +187,65 @@ function SearchPage(){
           )
         : (<div className='search-page-nothing'>Попробуйте изменить фильтры поиска, чтобы найти больше товаров!</div>)
         }
-        <div className='main-page-filter-bar'>
-          <FilterBar onSearch={updateProducts} ref={buttonRef} isSearching={isSearching} />
+        <div className='search-page-paginator-container'>
+          {products && (
+            <SearchPaginator
+              onNextPageClick={handleNextPageClick}
+              onPrevPageClick={handlePrevPageClick}
+              disable={{
+                left: page === 1,
+                right: page === pageMax,
+              }}
+              nav={{ current: page, total: pageMax }}
+            />
+          )}
         </div>
-      </div>
-      <div className='search-page-paginator-container'>
-        {products && (
-          <SearchPaginator
-            onNextPageClick={handleNextPageClick}
-            onPrevPageClick={handlePrevPageClick}
-            disable={{
-              left: page === 1,
-              right: page === pageMax,
-            }}
-            nav={{ current: page, total: pageMax }}
-          />
-        )}
-      </div>
+        </>
+      ) : (
+        <>
+        <div className='main-page-components-container'>
+          {products.length > 0 
+          ? (
+            <div className='main-page-products'>
+              {products.map((product) => (
+                <ProductCard
+                  key = {product.id}
+                  id = {product.id}
+                  name = {product.name}
+                  desc = {product.desc}
+                  category = {product.category}
+                  brand = {product.brand}
+                  image = {product.image}
+                  fPrice = {product.fPrice}
+                  sPrice = {product.sPrice}
+                  gender = {product.gender}
+                />
+              ))}
+            </div>
+            )
+          : (<div className='search-page-nothing'>Попробуйте изменить фильтры поиска, чтобы найти больше товаров!</div>)
+          }
+          <div className='main-page-filter-bar'>
+            <FilterBar onSearch={updateProducts} ref={buttonRef} isSearching={isSearching} />
+          </div>
+        </div>
+        <div className='search-page-paginator-container'>
+          {products && (
+            <SearchPaginator
+              onNextPageClick={handleNextPageClick}
+              onPrevPageClick={handlePrevPageClick}
+              disable={{
+                left: page === 1,
+                right: page === pageMax,
+              }}
+              nav={{ current: page, total: pageMax }}
+            />
+          )}
+        </div>
+        </>
+      )}
+
+      
     </div>
   );
 }

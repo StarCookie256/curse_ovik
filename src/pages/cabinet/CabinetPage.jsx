@@ -6,6 +6,8 @@ import { API_IMAGE_PATH } from '../../api/config';
 function CabinetPage(){
   const {user, refreshProfile, checkAuth} = useAuth();
   const [loading, setLoading] = useState(true);
+  const [mobileMode, setMobileMode] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   
   useEffect(() => {
     const loadUserData = async () => {
@@ -23,6 +25,24 @@ function CabinetPage(){
     loadUserData();
   }, [checkAuth,refreshProfile]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth < 1100 && !mobileMode) {
+      setMobileMode(true);
+    } else if (windowWidth >= 1100 && mobileMode) {
+      setMobileMode(false);
+    }
+  }, [windowWidth, mobileMode]); 
+
   if(loading){
     return(
       <div className='loading-data'>Работа с данными, пожалуйста, подождите...</div>
@@ -30,7 +50,7 @@ function CabinetPage(){
   }
  
   return(
-    <div className='cabinet-page-container'>
+    <div className={`cabinet-page-container ${mobileMode}`}>
       <div className='cabinet-page-elements-container'>
 
         <div className='cabinet-page-info-container'>
